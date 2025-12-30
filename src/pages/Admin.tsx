@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Plus, Edit2, Trash2, LogOut, Shield, Search, Loader2 } from "lucide-react";
+import { Plus, Edit2, Trash2, LogOut, Shield, Search, Loader2, FileText } from "lucide-react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -42,6 +42,7 @@ interface Visa {
   issue_date: string;
   expiry_date: string;
   created_at: string;
+  document_url?: string | null;
 }
 
 const Admin = () => {
@@ -216,6 +217,7 @@ const Admin = () => {
                     <TableHead>Passeport</TableHead>
                     <TableHead>Référence</TableHead>
                     <TableHead>Statut</TableHead>
+                    <TableHead>Document</TableHead>
                     <TableHead>Expiration</TableHead>
                     <TableHead className="text-right">Actions</TableHead>
                   </TableRow>
@@ -232,6 +234,13 @@ const Admin = () => {
                       </TableCell>
                       <TableCell>
                         <VisaStatusBadge status={visa.status} size="sm" />
+                      </TableCell>
+                      <TableCell>
+                        {visa.document_url ? (
+                          <FileText className="w-4 h-4 text-primary" />
+                        ) : (
+                          <span className="text-muted-foreground text-sm">—</span>
+                        )}
                       </TableCell>
                       <TableCell>
                         {format(new Date(visa.expiry_date), "dd/MM/yyyy", {
