@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { User, CreditCard, FileText, Calendar } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { User, CreditCard, FileText, Calendar, Upload, X, File } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -30,6 +30,7 @@ interface Visa {
   status: VisaStatus;
   issue_date: string;
   expiry_date: string;
+  document_url?: string | null;
 }
 
 interface VisaFormDialogProps {
@@ -55,6 +56,9 @@ export function VisaFormDialog({
   onSuccess,
 }: VisaFormDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const [documentFile, setDocumentFile] = useState<File | null>(null);
+  const [existingDocUrl, setExistingDocUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     full_name: "",
     passport_number: "",
@@ -74,6 +78,7 @@ export function VisaFormDialog({
         issue_date: visa.issue_date,
         expiry_date: visa.expiry_date,
       });
+      setExistingDocUrl(visa.document_url || null);
     } else {
       setFormData({
         full_name: "",
@@ -83,8 +88,51 @@ export function VisaFormDialog({
         issue_date: "",
         expiry_date: "",
       });
+      setExistingDocUrl(null);
     }
+    setDocumentFile(null);
   }, [visa, open]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (file.type !== "application/pdf") {
+        toast.error("Seuls les fichiers PDF sont acceptés");
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        toast.error("Le fichier ne doit pas dépasser 10 Mo");
+        return;
+      }
+      setDocumentFile(file);
+    }
+  };
+
+  const removeFile = () => {
+    setDocumentFile(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const uploadDocument = async (visaId: string): Promise<string | null> => {
+    if (!documentFile) return existingDocUrl;
+
+    const fileExt = documentFile.name.split(".").pop();
+    const fileName = `${visaId}.${fileExt}`;
+    const filePath = `documents/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("visa-documents")
+      .upload(filePath, documentFile, { upsert: true });
+
+    if (uploadError) {
+      console.error("Upload error:", uploadError);
+      throw new Error("Erreur lors de l'upload du document");
+    }
+
+    return filePath;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -104,17 +152,24 @@ export function VisaFormDialog({
 
     try {
       if (visa) {
+        // Upload document if new file selected
+        const documentUrl = await uploadDocument(visa.id);
+        
         // Update existing visa
         const { error } = await supabase
           .from("visas")
-          .update(formData)
+          .update({ ...formData, document_url: documentUrl })
           .eq("id", visa.id);
 
         if (error) throw error;
         toast.success("Visa mis à jour avec succès");
       } else {
-        // Create new visa
-        const { error } = await supabase.from("visas").insert([formData]);
+        // Create new visa first to get the ID
+        const { data: newVisa, error } = await supabase
+          .from("visas")
+          .insert([formData])
+          .select()
+          .single();
 
         if (error) {
           if (error.message.includes("duplicate key")) {
@@ -123,13 +178,23 @@ export function VisaFormDialog({
           }
           throw error;
         }
+
+        // Upload document if file selected
+        if (documentFile && newVisa) {
+          const documentUrl = await uploadDocument(newVisa.id);
+          await supabase
+            .from("visas")
+            .update({ document_url: documentUrl })
+            .eq("id", newVisa.id);
+        }
+
         toast.success("Visa créé avec succès");
       }
 
       onSuccess();
     } catch (error) {
       console.error("Error saving visa:", error);
-      toast.error("Erreur lors de l'enregistrement");
+      toast.error(error instanceof Error ? error.message : "Erreur lors de l'enregistrement");
     } finally {
       setIsLoading(false);
     }
@@ -250,6 +315,60 @@ export function VisaFormDialog({
                 }
               />
             </div>
+          </div>
+
+          {/* Document upload */}
+          <div className="space-y-2">
+            <Label className="flex items-center gap-2">
+              <Upload className="w-4 h-4 text-muted-foreground" />
+              Document PDF (optionnel)
+            </Label>
+            
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".pdf"
+              onChange={handleFileChange}
+              className="hidden"
+            />
+
+            {documentFile ? (
+              <div className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                <File className="w-5 h-5 text-primary" />
+                <span className="text-sm flex-1 truncate">{documentFile.name}</span>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={removeFile}
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
+            ) : existingDocUrl ? (
+              <div className="flex items-center gap-2 p-3 bg-muted rounded-lg">
+                <File className="w-5 h-5 text-primary" />
+                <span className="text-sm flex-1">Document existant</span>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Remplacer
+                </Button>
+              </div>
+            ) : (
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => fileInputRef.current?.click()}
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                Choisir un fichier PDF
+              </Button>
+            )}
           </div>
 
           {/* Actions */}
