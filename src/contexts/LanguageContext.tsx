@@ -1,0 +1,168 @@
+import { createContext, useContext, useState, ReactNode } from "react";
+
+type Language = "FR" | "EN" | "DE" | "LU";
+
+interface LanguageContextType {
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: (key: string) => string;
+}
+
+const translations: Record<Language, Record<string, string>> = {
+  FR: {
+    "nav.home": "Accueil",
+    "nav.verify": "Vérifier un visa",
+    "nav.info": "Informations",
+    "nav.services": "Services aux citoyens",
+    "nav.contact": "Contact",
+    "nav.admin": "Administration",
+    "header.government": "Le gouvernement",
+    "header.subtitle": "luxembourgeois",
+    "header.ministry": "Service de Vérification des Visas",
+    "header.topLeft": "gouvernement.lu",
+    "header.topLeftSub": "Ministères",
+    "header.topRight": "LE GOUVERNEMENT",
+    "header.topRightSub": "DU GRAND-DUCHÉ DE LUXEMBOURG",
+    "hero.title": "Vérification de Visa",
+    "hero.description": "Vérifiez l'authenticité et la validité d'un visa délivré par le Luxembourg",
+    "features.title": "Comment ça marche",
+    "features.step1.title": "Entrez les informations",
+    "features.step1.desc": "Saisissez le numéro de référence du visa et le numéro de passeport",
+    "features.step2.title": "Vérification instantanée",
+    "features.step2.desc": "Notre système vérifie les informations en temps réel",
+    "features.step3.title": "Résultat sécurisé",
+    "features.step3.desc": "Obtenez une confirmation officielle du statut du visa",
+    "info.title": "Informations importantes",
+    "info.required": "Éléments requis",
+    "info.requiredDesc": "Pour vérifier un visa, vous aurez besoin du numéro de référence du visa (format: LU-XXXX-XXXX) et du numéro de passeport du titulaire.",
+    "info.official": "Service officiel",
+    "info.officialDesc": "Ce service est fourni par le gouvernement du Grand-Duché de Luxembourg. Pour toute question, veuillez contacter les autorités compétentes.",
+    "footer.rights": "Tous droits réservés",
+    "footer.legal": "Mentions légales",
+    "footer.privacy": "Vie privée",
+    "footer.accessibility": "Accessibilité",
+  },
+  EN: {
+    "nav.home": "Home",
+    "nav.verify": "Verify a visa",
+    "nav.info": "Information",
+    "nav.services": "Citizen services",
+    "nav.contact": "Contact",
+    "nav.admin": "Administration",
+    "header.government": "The government",
+    "header.subtitle": "of Luxembourg",
+    "header.ministry": "Visa Verification Service",
+    "header.topLeft": "gouvernement.lu",
+    "header.topLeftSub": "Ministries",
+    "header.topRight": "THE GOVERNMENT",
+    "header.topRightSub": "OF THE GRAND DUCHY OF LUXEMBOURG",
+    "hero.title": "Visa Verification",
+    "hero.description": "Verify the authenticity and validity of a visa issued by Luxembourg",
+    "features.title": "How it works",
+    "features.step1.title": "Enter the information",
+    "features.step1.desc": "Enter the visa reference number and passport number",
+    "features.step2.title": "Instant verification",
+    "features.step2.desc": "Our system verifies the information in real time",
+    "features.step3.title": "Secure result",
+    "features.step3.desc": "Get official confirmation of visa status",
+    "info.title": "Important information",
+    "info.required": "Required elements",
+    "info.requiredDesc": "To verify a visa, you will need the visa reference number (format: LU-XXXX-XXXX) and the holder's passport number.",
+    "info.official": "Official service",
+    "info.officialDesc": "This service is provided by the Government of the Grand Duchy of Luxembourg. For any questions, please contact the competent authorities.",
+    "footer.rights": "All rights reserved",
+    "footer.legal": "Legal notice",
+    "footer.privacy": "Privacy",
+    "footer.accessibility": "Accessibility",
+  },
+  DE: {
+    "nav.home": "Startseite",
+    "nav.verify": "Visum überprüfen",
+    "nav.info": "Informationen",
+    "nav.services": "Bürgerdienste",
+    "nav.contact": "Kontakt",
+    "nav.admin": "Verwaltung",
+    "header.government": "Die Regierung",
+    "header.subtitle": "von Luxemburg",
+    "header.ministry": "Visum-Überprüfungsdienst",
+    "header.topLeft": "gouvernement.lu",
+    "header.topLeftSub": "Ministerien",
+    "header.topRight": "DIE REGIERUNG",
+    "header.topRightSub": "DES GROSSHERZOGTUMS LUXEMBURG",
+    "hero.title": "Visum-Überprüfung",
+    "hero.description": "Überprüfen Sie die Echtheit und Gültigkeit eines von Luxemburg ausgestellten Visums",
+    "features.title": "So funktioniert es",
+    "features.step1.title": "Informationen eingeben",
+    "features.step1.desc": "Geben Sie die Visum-Referenznummer und Passnummer ein",
+    "features.step2.title": "Sofortige Überprüfung",
+    "features.step2.desc": "Unser System überprüft die Informationen in Echtzeit",
+    "features.step3.title": "Sicheres Ergebnis",
+    "features.step3.desc": "Erhalten Sie eine offizielle Bestätigung des Visumstatus",
+    "info.title": "Wichtige Informationen",
+    "info.required": "Erforderliche Elemente",
+    "info.requiredDesc": "Um ein Visum zu überprüfen, benötigen Sie die Visum-Referenznummer (Format: LU-XXXX-XXXX) und die Passnummer des Inhabers.",
+    "info.official": "Offizieller Dienst",
+    "info.officialDesc": "Dieser Dienst wird von der Regierung des Großherzogtums Luxemburg bereitgestellt. Bei Fragen wenden Sie sich bitte an die zuständigen Behörden.",
+    "footer.rights": "Alle Rechte vorbehalten",
+    "footer.legal": "Impressum",
+    "footer.privacy": "Datenschutz",
+    "footer.accessibility": "Barrierefreiheit",
+  },
+  LU: {
+    "nav.home": "Heem",
+    "nav.verify": "Visa iwwerpréiwen",
+    "nav.info": "Informatiounen",
+    "nav.services": "Biergerservicer",
+    "nav.contact": "Kontakt",
+    "nav.admin": "Administratioun",
+    "header.government": "D'Regierung",
+    "header.subtitle": "vu Lëtzebuerg",
+    "header.ministry": "Visa Iwwerpréiwungsservice",
+    "header.topLeft": "gouvernement.lu",
+    "header.topLeftSub": "Ministèren",
+    "header.topRight": "D'REGIERUNG",
+    "header.topRightSub": "VUM GROUSSHERZOGTUM LËTZEBUERG",
+    "hero.title": "Visa Iwwerpréiwung",
+    "hero.description": "Iwwerpréift d'Echtheid an d'Validitéit vun engem Visa vum Lëtzebuerg",
+    "features.title": "Wéi et fonctionéiert",
+    "features.step1.title": "Informatiounen aginn",
+    "features.step1.desc": "Gitt d'Visa Referenznummer an d'Passnummer an",
+    "features.step2.title": "Direkt Iwwerpréiwung",
+    "features.step2.desc": "Eise System iwwerpréift d'Informatiounen a Realzäit",
+    "features.step3.title": "Séchert Resultat",
+    "features.step3.desc": "Kritt eng offiziell Bestätegung vum Visa Status",
+    "info.title": "Wichteg Informatiounen",
+    "info.required": "Erfuerderlech Elementer",
+    "info.requiredDesc": "Fir e Visa ze iwwerpréiwen, braucht Dir d'Visa Referenznummer (Format: LU-XXXX-XXXX) an d'Passnummer vum Inhaber.",
+    "info.official": "Offiziellen Service",
+    "info.officialDesc": "Dëse Service gëtt vun der Regierung vum Groussherzogtum Lëtzebuerg ugebueden. Fir all Froen, kontaktéiert w.e.g. déi kompetent Autoritéiten.",
+    "footer.rights": "All Rechter reservéiert",
+    "footer.legal": "Rechtlech Hiweiser",
+    "footer.privacy": "Dateschutz",
+    "footer.accessibility": "Accessibilitéit",
+  },
+};
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState<Language>("FR");
+
+  const t = (key: string): string => {
+    return translations[language][key] || key;
+  };
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error("useLanguage must be used within a LanguageProvider");
+  }
+  return context;
+}
