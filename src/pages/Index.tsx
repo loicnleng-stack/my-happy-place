@@ -269,24 +269,61 @@ const Index = () => {
         <section className="container py-8">
           <h2 className="text-3xl font-light text-foreground mb-8">Dossiers</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {dossiers.map((dossier, index) => (
-              <Link
-                key={index}
-                to="#"
-                className="group block animate-fade-in"
-                style={{ animationDelay: `${0.6 + index * 0.1}s` }}
-              >
-                <div className="aspect-video bg-primary relative overflow-hidden rounded-sm">
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-primary/80" />
+            {/* First dossier - Photo style */}
+            <Link
+              to="#"
+              className="group block animate-fade-in"
+              style={{ animationDelay: "0.6s" }}
+            >
+              <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden rounded-sm">
+                {/* Placeholder for government photo */}
+                <div className="absolute inset-0 flex items-end justify-center">
+                  <div className="flex -space-x-2 mb-4">
+                    {governmentMembers.slice(0, 8).map((member, i) => (
+                      <img
+                        key={i}
+                        src={member.image}
+                        alt={member.name}
+                        className="w-12 h-12 rounded-full border-2 border-white object-cover object-top"
+                      />
+                    ))}
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-primary mt-4 group-hover:underline">
-                  {dossier.title}
-                </h3>
-                {dossier.description && (
-                  <p className="text-sm text-foreground mt-2">{dossier.description}</p>
-                )}
-              </Link>
-            ))}
+              </div>
+              <h3 className="text-xl font-semibold text-primary mt-4 group-hover:underline">
+                La formation du gouvernement 2023
+              </h3>
+            </Link>
+
+            {/* Second dossier - Card with description */}
+            <Link
+              to="#"
+              className="group block animate-fade-in"
+              style={{ animationDelay: "0.7s" }}
+            >
+              <div className="relative">
+                {/* Blue tech background */}
+                <div className="aspect-video bg-primary relative overflow-hidden rounded-sm">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="grid grid-cols-4 gap-4 opacity-30">
+                      {Array.from({ length: 12 }).map((_, i) => (
+                        <div key={i} className="w-8 h-8 bg-primary-foreground/20 rounded-full" />
+                      ))}
+                    </div>
+                    <div className="absolute right-4 top-4 text-primary-foreground/40 text-6xl font-light">@</div>
+                  </div>
+                </div>
+                {/* Description box */}
+                <div className="bg-sky-50 p-4">
+                  <h3 className="text-lg font-semibold text-primary group-hover:underline">
+                    L'engagement du gouvernement pour l'accessibilité numérique
+                  </h3>
+                  <p className="text-sm text-foreground mt-2">
+                    L'égalité est un des principes fondamentaux de notre démocratie. Tous les sites Internet et les applications mobiles des organismes publics sont soumis à une exigence de non-discrimination des usagers, en particulier sur la question du handicap.
+                  </p>
+                </div>
+              </div>
+            </Link>
           </div>
           <div className="text-center mt-8">
             <Link
