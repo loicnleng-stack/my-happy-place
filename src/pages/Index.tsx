@@ -22,6 +22,8 @@ import elisabethMargue from "@/assets/ministers/elisabeth-margue.png";
 import ericThill from "@/assets/ministers/eric-thill.png";
 import dossierGouvernement from "@/assets/dossier-gouvernement-2023.png";
 import conferencePresse from "@/assets/conference-presse.png";
+import publicationHistoire from "@/assets/publication-histoire.png";
+import publicationLangues from "@/assets/publication-langues.png";
 
 const governmentMembers = [
   { name: "FRIEDEN Luc", role: "Premier ministre, ministre d'État", image: lucFrieden },
@@ -418,35 +420,53 @@ const Index = () => {
         <section className="container py-8">
           <h2 className="text-3xl font-light text-foreground mb-8">Publications</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {publications.map((pub, index) => (
-              <div
-                key={index}
-                className="bg-muted/50 p-6 rounded-sm flex gap-6 animate-fade-in"
-                style={{ animationDelay: `${1 + index * 0.1}s` }}
-              >
-                <div className="w-32 flex-shrink-0">
-                  <div className="aspect-[3/4] bg-background border border-border rounded-sm flex items-center justify-center p-4">
-                    <div className="text-center">
-                      <p className="text-xs text-muted-foreground">Grand-Duché de Luxembourg</p>
-                      <h4 className="text-primary font-bold text-lg mt-2">À PROPOS</h4>
-                      <p className="text-xs text-muted-foreground mt-1">...</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-primary">{pub.title}</h3>
-                  <p className="text-sm text-foreground mt-2">{pub.description}</p>
-                  <p className="text-sm text-muted-foreground mt-4">
-                    <span className="font-semibold text-foreground">LANGUE(S):</span> {pub.languages}
-                  </p>
-                </div>
+            {/* Publication 1 - Histoire du Luxembourg */}
+            <div className="bg-white border border-border p-6 flex gap-6 animate-fade-in" style={{ animationDelay: "1s" }}>
+              <div className="w-40 flex-shrink-0">
+                <img 
+                  src={publicationHistoire} 
+                  alt="À propos de l'histoire du Luxembourg" 
+                  className="w-full h-auto shadow-md"
+                />
               </div>
-            ))}
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-primary">à propos... de l&apos;histoire du Luxembourg</h3>
+                <p className="text-sm text-foreground mt-3 leading-relaxed">
+                  Cette brochure présente succinctement l&apos;évolution du Luxembourg du Xe siècle à nos jours. Une timeline présente au fil des pages les dates-clés de l&apos;histoire du Luxembourg. Un code QR qui figure en fin de brochure renvoie vers un site avec des liens utiles, permettant ainsi au lecteur intéressé d&apos;approfondir l&apos;un ou l&apos;autre aspect des sujets abordés dans cette publication.
+                </p>
+                <p className="text-sm mt-4">
+                  <span className="font-semibold text-primary">LANGUE(S):</span>{" "}
+                  <span className="text-primary">Français, Anglais, Allemand</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Publication 2 - Langues au Luxembourg */}
+            <div className="bg-white border border-border p-6 flex gap-6 animate-fade-in" style={{ animationDelay: "1.1s" }}>
+              <div className="w-40 flex-shrink-0">
+                <img 
+                  src={publicationLangues} 
+                  alt="À propos des langues au Luxembourg" 
+                  className="w-full h-auto shadow-md"
+                />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-lg font-semibold text-primary">À propos... des langues au Luxembourg</h3>
+                <p className="text-sm text-foreground mt-3 leading-relaxed">
+                  L&apos;usage linguistique dans le Grand-Duché de Luxembourg - 2025
+                </p>
+                <p className="text-sm mt-4">
+                  <span className="font-semibold text-primary">LANGUE(S):</span>{" "}
+                  <span className="text-primary">Français, Anglais, Allemand, Luxembourgeois</span>
+                </p>
+              </div>
+            </div>
           </div>
-          <div className="text-center mt-8">
+          <div className="text-center mt-8 relative">
+            <div className="absolute inset-x-0 top-1/2 border-t border-border"></div>
             <Link
               to="/publications"
-              className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
+              className="relative inline-block px-8 py-3 bg-background border border-border text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
             >
               Toutes les publications
             </Link>
