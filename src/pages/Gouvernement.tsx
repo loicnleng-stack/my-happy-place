@@ -4,16 +4,16 @@ import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
 
 // Import minister photos
-import lucFrieden from "@/assets/ministers/luc-frieden.jpg";
-import xavierBettel from "@/assets/ministers/xavier-bettel.jpg";
-import marcSpautz from "@/assets/ministers/marc-spautz.jpg";
-import martineHansen from "@/assets/ministers/martine-hansen.jpg";
-import claudeMeisch from "@/assets/ministers/claude-meisch.jpg";
-import lexDelles from "@/assets/ministers/lex-delles.jpg";
-import yurikoBackes from "@/assets/ministers/yuriko-backes.jpg";
-import maxHahn from "@/assets/ministers/max-hahn.jpg";
-import gillesRoth from "@/assets/ministers/gilles-roth.jpg";
-import martineDeprez from "@/assets/ministers/martine-deprez.jpg";
+import lucFrieden from "@/assets/ministers/luc-frieden.png";
+import xavierBettel from "@/assets/ministers/xavier-bettel.png";
+import marcSpautz from "@/assets/ministers/marc-spautz.png";
+import martineHansen from "@/assets/ministers/martine-hansen.png";
+import claudeMeisch from "@/assets/ministers/claude-meisch.png";
+import lexDelles from "@/assets/ministers/lex-delles.png";
+import yurikoBackes from "@/assets/ministers/yuriko-backes.png";
+import maxHahn from "@/assets/ministers/max-hahn.png";
+import gillesRoth from "@/assets/ministers/gilles-roth.png";
+import martineDeprez from "@/assets/ministers/martine-deprez.png";
 import leonGloden from "@/assets/ministers/leon-gloden.jpg";
 import stephanieObertin from "@/assets/ministers/stephanie-obertin.jpg";
 import sergeWilmes from "@/assets/ministers/serge-wilmes.jpg";
