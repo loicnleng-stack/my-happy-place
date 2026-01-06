@@ -1,10 +1,17 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { ChevronRight, FileText, Users, Building2, Calendar, Video, Newspaper } from "lucide-react";
+
+// Import minister images for preview
+import lucFrieden from "@/assets/ministers/luc-frieden.png";
+import xavierBettel from "@/assets/ministers/xavier-bettel.png";
+import martineHansen from "@/assets/ministers/martine-hansen.png";
+import gilles from "@/assets/ministers/gilles-roth.png";
 
 const institutionCards = [
   { title: "CHEF DE L'ÉTAT", href: "#" },
-  { title: "GOUVERNEMENT", href: "#" },
+  { title: "GOUVERNEMENT", href: "/gouvernement" },
   { title: "SYSTÈME ÉLECTORAL", href: "#" },
   { title: "CHAMBRE DES DÉPUTÉS", href: "#" },
   { title: "CONSEIL D'ÉTAT", href: "#" },
@@ -17,13 +24,80 @@ const institutionCards = [
   { title: "CONSEIL SUPÉRIEUR POUR UN DÉVELOPPEMENT DURABLE", href: "#" },
 ];
 
+const quickLinks = [
+  { title: "Actualités", icon: Newspaper, href: "/actualites", description: "Dernières nouvelles du gouvernement" },
+  { title: "Le gouvernement", icon: Users, href: "/gouvernement", description: "Composition du gouvernement actuel" },
+  { title: "Ministères", icon: Building2, href: "/ministeres", description: "Liste des ministères" },
+  { title: "Administrations", icon: FileText, href: "/administrations", description: "Services administratifs" },
+  { title: "Agenda", icon: Calendar, href: "/agenda", description: "Événements à venir" },
+  { title: "Conférences de presse", icon: Video, href: "/conferences", description: "Vidéos des conférences" },
+];
+
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
       <main className="flex-1">
-        {/* Main Content */}
+        {/* Hero Section - Quick Links */}
+        <section className="bg-gradient-to-b from-primary/5 to-background py-8 border-b border-border">
+          <div className="container">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {quickLinks.map((link, index) => (
+                <Link
+                  key={index}
+                  to={link.href}
+                  className="group flex flex-col items-center p-4 bg-background rounded-lg border border-border hover:border-primary hover:shadow-md transition-all duration-300"
+                >
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                    <link.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground transition-colors" />
+                  </div>
+                  <span className="text-sm font-medium text-center text-foreground">{link.title}</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Government Preview Section */}
+        <section className="py-10 bg-background">
+          <div className="container">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-light text-foreground">Le gouvernement</h2>
+              <Link to="/gouvernement" className="flex items-center gap-1 text-primary hover:underline text-sm">
+                Voir tout <ChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { name: "Luc Frieden", role: "Premier ministre", image: lucFrieden },
+                { name: "Xavier Bettel", role: "Vice-Premier ministre", image: xavierBettel },
+                { name: "Martine Hansen", role: "Vice-Première ministre", image: martineHansen },
+                { name: "Gilles Roth", role: "Ministre des Finances", image: gilles },
+              ].map((member, index) => (
+                <Link
+                  key={index}
+                  to="/gouvernement"
+                  className="group bg-card border border-border rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300"
+                >
+                  <div className="aspect-[3/4] overflow-hidden bg-muted">
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">{member.name}</h3>
+                    <p className="text-sm text-muted-foreground">{member.role}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Main Content - Système politique */}
         <article className="container py-8 md:py-12 animate-fade-in">
           {/* Last modified date */}
           <div className="text-right text-sm text-muted-foreground mb-6">
