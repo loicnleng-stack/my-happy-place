@@ -9,6 +9,8 @@ import Result from "./pages/Result";
 import Auth from "./pages/Auth";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import DocumentVerification from "./pages/DocumentVerification";
+import VisaVerification from "./pages/VisaVerification";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +23,10 @@ const App = () => (
           <AuthProvider>
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/verification" element={<DocumentVerification />} />
+              <Route path="/verification/visa" element={<VisaVerification />} />
+              <Route path="/verification/permis-conduire" element={<DocumentVerification />} />
+              <Route path="/verification/carte-sejour" element={<DocumentVerification />} />
               <Route path="/result" element={<Result />} />
               <Route path="/auth" element={<Auth />} />
               <Route path="/admin" element={<Admin />} />

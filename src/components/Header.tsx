@@ -38,18 +38,9 @@ const dropdownData: Record<string, { label: string; href: string }[]> = {
     { label: "Anciens membres du gouvernement", href: "#" },
   ],
   verification: [
-    { label: "Chef de l'État", href: "#" },
-    { label: "Gouvernement", href: "#" },
-    { label: "Système électoral", href: "#" },
-    { label: "Chambre des députés", href: "#" },
-    { label: "Conseil d'État", href: "#" },
-    { label: "Cour des comptes", href: "#" },
-    { label: "Conseil économique et social", href: "#" },
-    { label: "Chambres professionnelles", href: "#" },
-    { label: "Cours et tribunaux", href: "#" },
-    { label: "Partis politiques", href: "#" },
-    { label: "Union européenne et organisations internationales", href: "#" },
-    { label: "Conseil supérieur pour un développement durable", href: "#" },
+    { label: "Vérification de mon permis de conduire", href: "/verification/permis-conduire" },
+    { label: "Vérification de ma carte de séjour", href: "/verification/carte-sejour" },
+    { label: "Vérification de visa", href: "/verification/visa" },
   ],
 };
 
@@ -71,8 +62,7 @@ export function Header() {
     { id: "gouvernement", label: "Le gouvernement", hasDropdown: true },
     { id: "ministeres", label: "Ministères", hasDropdown: false, href: "#" },
     { id: "administrations", label: "Administrations", hasDropdown: false, href: "#" },
-    { id: "dossiers", label: "Dossiers", hasDropdown: false, href: "#" },
-    { id: "verification", label: "Système politique", hasDropdown: true, href: "/", isActive: true },
+    { id: "verification", label: "Vérification de documents", hasDropdown: true, href: "/verification", isActive: location.pathname.startsWith("/verification") },
   ];
 
   return (
