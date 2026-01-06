@@ -14,6 +14,7 @@ import VisaVerification from "./pages/VisaVerification";
 import Gouvernement from "./pages/Gouvernement";
 import Ministeres from "./pages/Ministeres";
 import Administrations from "./pages/Administrations";
+import SystemePolitique from "./pages/SystemePolitique";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ const App = () => (
               <Route path="/gouvernement" element={<Gouvernement />} />
               <Route path="/ministeres" element={<Ministeres />} />
               <Route path="/administrations" element={<Administrations />} />
+              <Route path="/systeme-politique" element={<SystemePolitique />} />
               <Route path="/verification" element={<DocumentVerification />} />
               <Route path="/verification/visa" element={<VisaVerification />} />
               <Route path="/verification/permis-conduire" element={<DocumentVerification />} />

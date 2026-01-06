@@ -37,6 +37,20 @@ const dropdownData: Record<string, { label: string; href: string }[]> = {
     { label: "Eric THILL", href: "/gouvernement" },
     { label: "Anciens membres du gouvernement", href: "/gouvernement" },
   ],
+  systemePolitique: [
+    { label: "Chef de l'État", href: "/systeme-politique" },
+    { label: "Gouvernement", href: "/gouvernement" },
+    { label: "Système électoral", href: "/systeme-politique" },
+    { label: "Chambre des députés", href: "/systeme-politique" },
+    { label: "Conseil d'État", href: "/systeme-politique" },
+    { label: "Cour des comptes", href: "/systeme-politique" },
+    { label: "Conseil économique et social", href: "/systeme-politique" },
+    { label: "Chambres professionnelles", href: "/systeme-politique" },
+    { label: "Cours et tribunaux", href: "/systeme-politique" },
+    { label: "Partis politiques", href: "/systeme-politique" },
+    { label: "Union européenne et organisations internationales", href: "/systeme-politique" },
+    { label: "Conseil supérieur pour un développement durable", href: "/systeme-politique" },
+  ],
   verification: [
     { label: "Vérification de mon permis de conduire", href: "/verification/permis-conduire" },
     { label: "Vérification de ma carte de séjour", href: "/verification/carte-sejour" },
@@ -62,7 +76,8 @@ export function Header() {
     { id: "gouvernement", label: "Le gouvernement", hasDropdown: true, href: "/gouvernement" },
     { id: "ministeres", label: "Ministères", hasDropdown: false, href: "/ministeres" },
     { id: "administrations", label: "Administrations", hasDropdown: false, href: "/administrations" },
-    { id: "verification", label: "Vérification de documents", hasDropdown: true, href: "/verification", isActive: location.pathname.startsWith("/verification") },
+    { id: "dossiers", label: "Dossiers", hasDropdown: false, href: "#" },
+    { id: "systemePolitique", label: "Système politique", hasDropdown: true, href: "/systeme-politique", isActive: location.pathname.startsWith("/systeme-politique") },
   ];
 
   return (
