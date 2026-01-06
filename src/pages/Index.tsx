@@ -30,6 +30,7 @@ import portailGuichet from "@/assets/portail-guichet.png";
 import lucFriedenFacebook from "@/assets/luc-frieden-facebook.png";
 import govLogoSmall from "@/assets/gov-logo-small.png";
 import etatNation2025 from "@/assets/etat-nation-2025.png";
+import dossierAccessibilite from "@/assets/dossier-accessibilite.png";
 
 const governmentMembers = [
   { name: "FRIEDEN Luc", role: "Premier ministre, ministre d'État", image: lucFrieden },
@@ -293,33 +294,31 @@ const Index = () => {
               style={{ animationDelay: "0.7s" }}
             >
               <div className="relative">
-                {/* Blue tech background */}
-                <div className="aspect-video bg-primary relative overflow-hidden rounded-sm">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="grid grid-cols-4 gap-4 opacity-30">
-                      {Array.from({ length: 12 }).map((_, i) => (
-                        <div key={i} className="w-8 h-8 bg-primary-foreground/20 rounded-full" />
-                      ))}
-                    </div>
-                    <div className="absolute right-4 top-4 text-primary-foreground/40 text-6xl font-light">@</div>
-                  </div>
+                {/* Blue tech background with actual image */}
+                <div className="aspect-video overflow-hidden">
+                  <img 
+                    src={dossierAccessibilite} 
+                    alt="Accessibilité numérique" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 {/* Description box */}
                 <div className="bg-sky-50 p-4">
                   <h3 className="text-lg font-semibold text-primary group-hover:underline">
-                    L'engagement du gouvernement pour l'accessibilité numérique
+                    L&apos;engagement du gouvernement pour l&apos;accessibilité numérique
                   </h3>
                   <p className="text-sm text-foreground mt-2">
-                    L'égalité est un des principes fondamentaux de notre démocratie. Tous les sites Internet et les applications mobiles des organismes publics sont soumis à une exigence de non-discrimination des usagers, en particulier sur la question du handicap.
+                    L&apos;égalité est un des principes fondamentaux de notre démocratie. Tous les sites Internet et les applications mobiles des organismes publics sont soumis à une exigence de non-discrimination des usagers, en particulier sur la question du handicap.
                   </p>
                 </div>
               </div>
             </Link>
           </div>
-          <div className="text-center mt-8">
+          <div className="text-center mt-8 relative">
+            <div className="absolute inset-x-0 top-1/2 border-t border-border"></div>
             <Link
               to="/dossiers"
-              className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
+              className="relative inline-block px-8 py-3 bg-background border border-border text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
             >
               Tous les dossiers
             </Link>
