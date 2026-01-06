@@ -24,6 +24,9 @@ import dossierGouvernement from "@/assets/dossier-gouvernement-2023.png";
 import conferencePresse from "@/assets/conference-presse.png";
 import publicationHistoire from "@/assets/publication-histoire.png";
 import publicationLangues from "@/assets/publication-langues.png";
+import portailMarches from "@/assets/portail-marches-publics.png";
+import portailGovjobs from "@/assets/portail-govjobs.png";
+import portailGuichet from "@/assets/portail-guichet.png";
 
 const governmentMembers = [
   { name: "FRIEDEN Luc", role: "Premier ministre, ministre d'État", image: lucFrieden },
@@ -476,24 +479,50 @@ const Index = () => {
         {/* Portails Section */}
         <section className="container py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: "Portail des marchés publics", description: "Trouvez tous les marchés publics sur le portail luxembourgeois des marchés publics:", url: "#" },
-              { title: "Portail GovJobs", description: "L'État luxembourgeois recrute! Découvrez les postes vacants pour fonctionnaires, employés et salariés de l'État:", url: "#" },
-              { title: "Portail Guichet.lu", description: "Trouvez l'ensemble des informations, démarches et services proposés par les organismes publics luxembourgeois sur Guichet.lu:", url: "#" },
-            ].map((portal, index) => (
-              <a
-                key={index}
-                href={portal.url}
-                className="group bg-muted/50 p-6 rounded-sm hover:shadow-lg transition-all duration-300 animate-fade-in"
-                style={{ animationDelay: `${1.2 + index * 0.1}s` }}
-              >
-                <h3 className="text-xl font-semibold text-primary group-hover:underline">{portal.title}</h3>
-                <p className="text-sm text-foreground mt-2">{portal.description}</p>
-                <div className="mt-4 aspect-video bg-background border border-border rounded-sm flex items-center justify-center">
-                  <ExternalLink className="w-8 h-8 text-muted-foreground" />
-                </div>
-              </a>
-            ))}
+            {/* Portail des marchés publics */}
+            <a
+              href="https://marches.public.lu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-gray-100 p-6 hover:shadow-lg transition-all duration-300 animate-fade-in"
+              style={{ animationDelay: "1.2s" }}
+            >
+              <h3 className="text-xl font-semibold text-primary group-hover:underline">Portail des marchés publics</h3>
+              <p className="text-sm text-foreground mt-2">Trouvez tous les marchés publics sur le portail luxembourgeois des marchés publics:</p>
+              <div className="mt-4 overflow-hidden border border-border">
+                <img src={portailMarches} alt="Portail des marchés publics" className="w-full h-auto" />
+              </div>
+            </a>
+
+            {/* Portail GovJobs */}
+            <a
+              href="https://govjobs.public.lu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-gray-100 p-6 hover:shadow-lg transition-all duration-300 animate-fade-in"
+              style={{ animationDelay: "1.3s" }}
+            >
+              <h3 className="text-xl font-semibold text-primary group-hover:underline">Portail GovJobs</h3>
+              <p className="text-sm text-foreground mt-2">L&apos;État luxembourgeois recrute! Découvrez les postes vacants pour fonctionnaires, employés et salariés de l&apos;État:</p>
+              <div className="mt-4 overflow-hidden border border-border">
+                <img src={portailGovjobs} alt="Portail GovJobs" className="w-full h-auto" />
+              </div>
+            </a>
+
+            {/* Portail Guichet.lu */}
+            <a
+              href="https://guichet.lu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-gray-100 p-6 hover:shadow-lg transition-all duration-300 animate-fade-in"
+              style={{ animationDelay: "1.4s" }}
+            >
+              <h3 className="text-xl font-semibold text-primary group-hover:underline">Portail Guichet.lu</h3>
+              <p className="text-sm text-foreground mt-2">Trouvez l&apos;ensemble des informations, démarches et services proposés par les organismes publics luxembourgeois sur Guichet.lu:</p>
+              <div className="mt-4 overflow-hidden border border-border">
+                <img src={portailGuichet} alt="Portail Guichet.lu" className="w-full h-auto" />
+              </div>
+            </a>
           </div>
         </section>
       </main>
