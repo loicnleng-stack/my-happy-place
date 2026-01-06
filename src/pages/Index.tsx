@@ -21,6 +21,7 @@ import sergeWilmes from "@/assets/ministers/serge-wilmes.png";
 import elisabethMargue from "@/assets/ministers/elisabeth-margue.png";
 import ericThill from "@/assets/ministers/eric-thill.png";
 import dossierGouvernement from "@/assets/dossier-gouvernement-2023.png";
+import conferencePresse from "@/assets/conference-presse.png";
 
 const governmentMembers = [
   { name: "FRIEDEN Luc", role: "Premier ministre, ministre d'État", image: lucFrieden },
@@ -85,21 +86,15 @@ const Index = () => {
             {/* Main News */}
             <div className="lg:col-span-2 animate-fade-in">
               <Link to="/actualites" className="group block">
-                <div className="aspect-video bg-primary relative overflow-hidden rounded-sm">
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-primary/40 flex items-center justify-center">
-                    <div className="text-center text-primary-foreground p-8">
-                      <div className="w-16 h-16 mx-auto mb-4 opacity-80">
-                        <svg viewBox="0 0 100 100" className="w-full h-full fill-current">
-                          <path d="M50 10 L60 40 L90 40 L65 60 L75 90 L50 70 L25 90 L35 60 L10 40 L40 40 Z" />
-                        </svg>
-                      </div>
-                      <p className="text-sm uppercase tracking-widest">Le Gouvernement</p>
-                      <p className="text-sm uppercase tracking-widest">du Grand-Duché de Luxembourg</p>
-                    </div>
-                  </div>
+                <div className="aspect-video overflow-hidden rounded-sm">
+                  <img 
+                    src={conferencePresse} 
+                    alt="Conférence de presse" 
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                 </div>
                 <h3 className="text-xl font-semibold text-primary mt-4 group-hover:underline transition-colors">
-                  Présentation d'un paquet de mesures "Mateneen. Fir all Famill. Fir all Kand.": classe d'impôt unique, chèque-service accueil, allocation familiale
+                  Présentation d&apos;un paquet de mesures &quot;Mateneen. Fir all Famill. Fir all Kand.&quot;: classe d&apos;impôt unique, chèque-service accueil, allocation familiale
                 </h3>
                 <p className="text-sm text-primary mt-2">06.01.2026</p>
                 <p className="text-muted-foreground mt-2">Le livestreaming débute vers 10h30.</p>
@@ -114,7 +109,7 @@ const Index = () => {
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">29.12.2025</p>
                 <p className="text-sm text-foreground mt-2">
-                  De nouvelles dispositions légales et réglementaires concernant directement le citoyen vont entrer en vigueur en 2026. Voici un aperçu des principaux changements qui ont un impact direct sur les citoyens. Cette liste n'est pas exhaustive.
+                  De nouvelles dispositions légales et réglementaires concernant directement le citoyen vont entrer en vigueur en 2026. Voici un aperçu des principaux changements qui ont un impact direct sur les citoyens. Cette liste n&apos;est pas exhaustive.
                 </p>
               </Link>
 
@@ -124,7 +119,7 @@ const Index = () => {
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">04.01.2026</p>
                 <p className="text-sm text-foreground mt-2">
-                  Le gouvernement suit de près les événements au Venezuela, suite à l'opération militaire américaine lors de laquelle Nicolas Maduro et son épouse ont été capturés et transférés en dehors du pays.
+                  Le gouvernement suit de près les événements au Venezuela, suite à l&apos;opération militaire américaine lors de laquelle Nicolas Maduro et son épouse ont été capturés et transférés en dehors du pays.
                 </p>
               </Link>
             </div>
