@@ -14,11 +14,11 @@ import yurikoBackes from "@/assets/ministers/yuriko-backes.png";
 import maxHahn from "@/assets/ministers/max-hahn.png";
 import gillesRoth from "@/assets/ministers/gilles-roth.png";
 import martineDeprez from "@/assets/ministers/martine-deprez.png";
-import leonGloden from "@/assets/ministers/leon-gloden.jpg";
-import stephanieObertin from "@/assets/ministers/stephanie-obertin.jpg";
-import sergeWilmes from "@/assets/ministers/serge-wilmes.jpg";
-import elisabethMargue from "@/assets/ministers/elisabeth-margue.jpg";
-import ericThill from "@/assets/ministers/eric-thill.jpg";
+import leonGloden from "@/assets/ministers/leon-gloden.png";
+import stephanieObertin from "@/assets/ministers/stephanie-obertin.png";
+import sergeWilmes from "@/assets/ministers/serge-wilmes.png";
+import elisabethMargue from "@/assets/ministers/elisabeth-margue.png";
+import ericThill from "@/assets/ministers/eric-thill.png";
 
 const governmentMembers = [
   {
