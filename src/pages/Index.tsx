@@ -27,6 +27,9 @@ import publicationLangues from "@/assets/publication-langues.png";
 import portailMarches from "@/assets/portail-marches-publics.png";
 import portailGovjobs from "@/assets/portail-govjobs.png";
 import portailGuichet from "@/assets/portail-guichet.png";
+import lucFriedenFacebook from "@/assets/luc-frieden-facebook.png";
+import govLogoSmall from "@/assets/gov-logo-small.png";
+import etatNation2025 from "@/assets/etat-nation-2025.png";
 
 const governmentMembers = [
   { name: "FRIEDEN Luc", role: "Premier ministre, ministre d'État", image: lucFrieden },
@@ -167,55 +170,17 @@ const Index = () => {
                 <p className="text-foreground mb-6">
                   Trouvez ici la{" "}
                   <Link to="#" className="text-primary hover:underline">
-                    déclaration de politique générale sur l'état de la nation 2025 par Luc Frieden
+                    déclaration de politique générale sur l&apos;état de la nation 2025 par Luc Frieden
                   </Link>{" "}
                   ainsi que les illustrations correspondantes.
                 </p>
-                {/* Visual Card */}
-                <div className="bg-amber-600 rounded-sm aspect-[16/10] relative overflow-hidden">
-                  {/* Gear shapes background */}
-                  <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 400 250" preserveAspectRatio="xMidYMid slice">
-                    {/* Gear teeth around circle */}
-                    <path d="M200 40 L210 20 L220 40 M200 210 L210 230 L220 210 M70 125 L50 115 L50 135 L70 125 M330 125 L350 115 L350 135 L330 125" fill="none" stroke="white" strokeWidth="2"/>
-                    <circle cx="200" cy="125" r="70" fill="none" stroke="white" strokeWidth="2"/>
-                    {/* Corner gear shapes */}
-                    <path d="M40 40 L60 30 L80 40 L80 60 L60 70 L40 60 Z" fill="none" stroke="white" strokeWidth="1.5"/>
-                    <path d="M320 40 L340 30 L360 40 L360 60 L340 70 L320 60 Z" fill="none" stroke="white" strokeWidth="1.5"/>
-                    <path d="M40 190 L60 180 L80 190 L80 210 L60 220 L40 210 Z" fill="none" stroke="white" strokeWidth="1.5"/>
-                    <path d="M320 190 L340 180 L360 190 L360 210 L340 220 L320 210 Z" fill="none" stroke="white" strokeWidth="1.5"/>
-                  </svg>
-                  
-                  {/* Government logo top right */}
-                  <div className="absolute top-4 right-4 text-white/60 text-xs text-right">
-                    <div className="w-8 h-8 mb-1 opacity-60">
-                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-full h-full">
-                        <path d="M12 2L8 6H4V10L0 14L4 18V22H8L12 26L16 22H20V18L24 14L20 10V6H16L12 2Z"/>
-                      </svg>
-                    </div>
-                    <p className="text-[10px] leading-tight">LE GOUVERNEMENT<br/>DU GRAND-DUCHÉ DE LUXEMBOURG</p>
-                  </div>
-                  
-                  {/* Center content */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    {/* Circular progress ring */}
-                    <svg className="absolute w-48 h-48" viewBox="0 0 100 100">
-                      <circle cx="50" cy="50" r="40" fill="none" stroke="rgba(0,100,100,0.6)" strokeWidth="2" strokeDasharray="200 50"/>
-                    </svg>
-                    <div className="text-center z-10">
-                      <p className="text-white/80 text-sm italic -rotate-12 -translate-y-8 -translate-x-4">Progrès par la</p>
-                      <h4 className="text-white text-4xl md:text-5xl font-bold tracking-tight">Stabilité</h4>
-                      <p className="text-white/80 text-sm italic rotate-12 translate-y-4 translate-x-8">par le progrès</p>
-                    </div>
-                  </div>
-                  
-                  {/* Bottom left text */}
-                  <div className="absolute bottom-4 left-4 text-white">
-                    <p className="text-lg font-light">État de la</p>
-                    <p className="text-2xl font-bold">Nation 2025</p>
-                  </div>
-                  
-                  {/* Bottom right text */}
-                  <p className="absolute bottom-4 right-4 text-white/50 text-xs">Traduction de courtoisie</p>
+                {/* Visual Card - Using actual image */}
+                <div className="rounded-sm overflow-hidden">
+                  <img 
+                    src={etatNation2025} 
+                    alt="État de la Nation 2025 - Stabilité" 
+                    className="w-full h-auto"
+                  />
                 </div>
               </div>
             </div>
@@ -224,18 +189,16 @@ const Index = () => {
             <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
               <h3 className="text-2xl font-light text-foreground mb-6">Facebook</h3>
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-primary rounded flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-primary-foreground">
-                    <path d="M12 2L8 6H4V10L0 14L4 18V22H8L12 26L16 22H20V18L24 14L20 10V6H16L12 2Z"/>
-                  </svg>
+                <div className="w-10 h-10 rounded overflow-hidden">
+                  <img src={govLogoSmall} alt="Gouvernement luxembourgeois" className="w-full h-full object-cover" />
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Gouvernement luxembourgeois</p>
                   <p className="text-xs text-muted-foreground">il y a 6 jours</p>
                 </div>
               </div>
-              <div className="aspect-square bg-muted rounded-sm mb-6 overflow-hidden">
-                <img src={lucFrieden} alt="Luc Frieden" className="w-full h-full object-cover object-top" />
+              <div className="aspect-square bg-muted mb-6 overflow-hidden">
+                <img src={lucFriedenFacebook} alt="Luc Frieden" className="w-full h-full object-cover object-top" />
               </div>
               <div className="relative">
                 <div className="absolute inset-x-0 top-1/2 border-t border-border"></div>
