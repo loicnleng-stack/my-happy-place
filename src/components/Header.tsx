@@ -9,38 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-
-const LuxembourgCoatOfArms = () => (
-  <svg viewBox="0 0 32 40" className="w-8 h-10" aria-hidden="true">
-    {/* Simplified Luxembourg Red Lion */}
-    <g>
-      {/* Lion body */}
-      <path 
-        d="M8 35 Q6 30 8 25 Q7 20 10 15 Q12 10 16 8 Q20 10 22 15 Q25 20 24 25 Q26 30 24 35 Q20 38 16 38 Q12 38 8 35Z" 
-        fill="hsl(0 75% 45%)" 
-      />
-      {/* Crown */}
-      <path 
-        d="M12 8 L14 4 L16 7 L18 4 L20 8 Q16 10 12 8Z" 
-        fill="hsl(45 80% 50%)" 
-      />
-      {/* Lion details */}
-      <circle cx="13" cy="14" r="1.5" fill="hsl(210 25% 8%)" />
-      <path d="M10 18 Q13 20 16 18" stroke="hsl(210 25% 8%)" strokeWidth="1" fill="none" />
-      {/* Tail */}
-      <path 
-        d="M24 30 Q28 25 26 20 Q28 18 27 15" 
-        stroke="hsl(0 75% 45%)" 
-        strokeWidth="3" 
-        fill="none"
-        strokeLinecap="round"
-      />
-      {/* Claws */}
-      <path d="M9 33 L6 36 M10 34 L8 38 M11 35 L10 39" stroke="hsl(0 75% 45%)" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M23 33 L26 36 M22 34 L24 38 M21 35 L22 39" stroke="hsl(0 75% 45%)" strokeWidth="1.5" strokeLinecap="round" />
-    </g>
-  </svg>
-);
+import govLogo from "@/assets/gov-logo.png";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,18 +38,12 @@ export function Header() {
       {/* Top bar - white background */}
       <div className="bg-white border-b border-gray-200">
         <div className="container flex items-center justify-end py-2 gap-6">
-          {/* Coat of arms + government name */}
-          <div className="flex items-center gap-3">
-            <LuxembourgCoatOfArms />
-            <div className="text-right">
-              <p className="text-[10px] font-bold text-gray-800 uppercase tracking-wider leading-tight">
-                LE GOUVERNEMENT
-              </p>
-              <p className="text-[10px] text-gray-600 uppercase tracking-wider leading-tight">
-                DU GRAND-DUCHÉ DE LUXEMBOURG
-              </p>
-            </div>
-          </div>
+          {/* Government logo */}
+          <img 
+            src={govLogo} 
+            alt="Le Gouvernement du Grand-Duché de Luxembourg" 
+            className="h-10 object-contain"
+          />
 
           {/* Language selector */}
           <DropdownMenu>
