@@ -139,8 +139,47 @@
     @apply bg-primary text-primary-foreground;
   }
 
+  .gov-header-top {
+    @apply bg-card text-foreground border-b border-border;
+  }
+
+  .gov-header-middle {
+    background: linear-gradient(135deg, hsl(var(--gov-blue-dark)) 0%, hsl(var(--gov-blue)) 50%, hsl(var(--gov-blue-light)) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .gov-header-middle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.05) 100%);
+    pointer-events: none;
+  }
+
   .gov-nav {
-    @apply bg-primary/90 border-b border-primary-foreground/10;
+    @apply bg-primary border-b border-primary-foreground/10;
+  }
+
+  .gov-nav-item {
+    @apply relative px-4 py-3 text-sm text-primary-foreground/90 hover:text-primary-foreground transition-colors;
+  }
+
+  .gov-nav-item.active {
+    @apply text-primary-foreground;
+  }
+
+  .gov-nav-item.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: hsl(var(--gov-red));
   }
 
   .gov-card {
@@ -161,6 +200,10 @@
 
   .gov-badge-expired {
     @apply bg-muted-foreground text-primary-foreground;
+  }
+
+  .lang-selector {
+    @apply bg-destructive text-destructive-foreground px-3 py-1 text-sm font-medium cursor-pointer hover:bg-destructive/90 transition-colors;
   }
 }
 
