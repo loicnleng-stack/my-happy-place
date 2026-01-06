@@ -72,7 +72,7 @@ export function Header() {
   ];
 
   const navItems = [
-    { id: "actualites", label: "Actualités", hasDropdown: true, href: "/actualites" },
+    { id: "actualites", label: "Actualités", hasDropdown: true, href: "/" },
     { id: "gouvernement", label: "Le gouvernement", hasDropdown: true, href: "/gouvernement" },
     { id: "ministeres", label: "Ministères", hasDropdown: false, href: "/ministeres" },
     { id: "administrations", label: "Administrations", hasDropdown: false, href: "/administrations" },
