@@ -20,6 +20,7 @@ import stephanieObertin from "@/assets/ministers/stephanie-obertin.png";
 import sergeWilmes from "@/assets/ministers/serge-wilmes.png";
 import elisabethMargue from "@/assets/ministers/elisabeth-margue.png";
 import ericThill from "@/assets/ministers/eric-thill.png";
+import dossierGouvernement from "@/assets/dossier-gouvernement-2023.png";
 
 const governmentMembers = [
   { name: "FRIEDEN Luc", role: "Premier ministre, ministre d'État", image: lucFrieden },
@@ -275,20 +276,12 @@ const Index = () => {
               className="group block animate-fade-in"
               style={{ animationDelay: "0.6s" }}
             >
-              <div className="aspect-video bg-gradient-to-br from-gray-200 to-gray-300 relative overflow-hidden rounded-sm">
-                {/* Placeholder for government photo */}
-                <div className="absolute inset-0 flex items-end justify-center">
-                  <div className="flex -space-x-2 mb-4">
-                    {governmentMembers.slice(0, 8).map((member, i) => (
-                      <img
-                        key={i}
-                        src={member.image}
-                        alt={member.name}
-                        className="w-12 h-12 rounded-full border-2 border-white object-cover object-top"
-                      />
-                    ))}
-                  </div>
-                </div>
+              <div className="aspect-video overflow-hidden rounded-sm">
+                <img
+                  src={dossierGouvernement}
+                  alt="La formation du gouvernement 2023"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
               </div>
               <h3 className="text-xl font-semibold text-primary mt-4 group-hover:underline">
                 La formation du gouvernement 2023
