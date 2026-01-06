@@ -2,11 +2,29 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
 
+// Import minister photos
+import lucFrieden from "@/assets/ministers/luc-frieden.jpg";
+import xavierBettel from "@/assets/ministers/xavier-bettel.jpg";
+import marcSpautz from "@/assets/ministers/marc-spautz.jpg";
+import martineHansen from "@/assets/ministers/martine-hansen.jpg";
+import claudeMeisch from "@/assets/ministers/claude-meisch.jpg";
+import lexDelles from "@/assets/ministers/lex-delles.jpg";
+import yurikoBackes from "@/assets/ministers/yuriko-backes.jpg";
+import maxHahn from "@/assets/ministers/max-hahn.jpg";
+import gillesRoth from "@/assets/ministers/gilles-roth.jpg";
+import martineDeprez from "@/assets/ministers/martine-deprez.jpg";
+import leonGloden from "@/assets/ministers/leon-gloden.jpg";
+import stephanieObertin from "@/assets/ministers/stephanie-obertin.jpg";
+import sergeWilmes from "@/assets/ministers/serge-wilmes.jpg";
+import elisabethMargue from "@/assets/ministers/elisabeth-margue.jpg";
+import ericThill from "@/assets/ministers/eric-thill.jpg";
+
 const governmentMembers = [
   {
     name: "FRIEDEN Luc",
     position: "Premier ministre",
     roles: ["Ministre d'État"],
+    photo: lucFrieden,
     isPremier: true,
   },
   {
@@ -16,11 +34,13 @@ const governmentMembers = [
       "Ministre des Affaires étrangères et du Commerce extérieur",
       "Ministre de la Coopération et de l'Action humanitaire",
     ],
+    photo: xavierBettel,
   },
   {
     name: "SPAUTZ Marc",
     position: "Ministre du Travail",
     roles: [],
+    photo: marcSpautz,
   },
   {
     name: "HANSEN Martine",
@@ -29,16 +49,19 @@ const governmentMembers = [
       "Ministre de la Protection des consommateurs",
       "Ministre des Sports",
     ],
+    photo: martineHansen,
   },
   {
     name: "MEISCH Claude",
     position: "Ministre de l'Éducation nationale, de l'Enfance et de la Jeunesse",
     roles: ["Ministre du Logement et de l'Aménagement du territoire"],
+    photo: claudeMeisch,
   },
   {
     name: "DELLES Lex",
     position: "Ministre de l'Économie, des PME, de l'Énergie et du Tourisme",
     roles: [],
+    photo: lexDelles,
   },
   {
     name: "BACKES Yuriko",
@@ -47,26 +70,31 @@ const governmentMembers = [
       "Ministre de la Mobilité et des Travaux publics",
       "Ministre de l'Égalité des genres et de la Diversité",
     ],
+    photo: yurikoBackes,
   },
   {
     name: "HAHN Max",
     position: "Ministre de la Famille, des Solidarités, du Vivre ensemble et de l'Accueil",
     roles: [],
+    photo: maxHahn,
   },
   {
     name: "ROTH Gilles",
     position: "Ministre des Finances",
     roles: [],
+    photo: gillesRoth,
   },
   {
     name: "DEPREZ Martine",
     position: "Ministre de la Santé et de la Sécurité sociale",
     roles: [],
+    photo: martineDeprez,
   },
   {
     name: "GLODEN Léon",
     position: "Ministre de l'Intérieur",
     roles: ["Ministre de la Justice"],
+    photo: leonGloden,
   },
   {
     name: "OBERTIN Stéphanie",
@@ -75,21 +103,25 @@ const governmentMembers = [
       "Ministre de la Recherche et de l'Enseignement supérieur",
       "Ministre de la Culture",
     ],
+    photo: stephanieObertin,
   },
   {
     name: "WILMES Serge",
     position: "Ministre de l'Environnement, du Climat et de la Biodiversité",
     roles: [],
+    photo: sergeWilmes,
   },
   {
     name: "MARGUE Elisabeth",
     position: "Ministre de la Fonction publique",
     roles: ["Ministre des Relations avec le Parlement"],
+    photo: elisabethMargue,
   },
   {
     name: "THILL Eric",
     position: "Secrétaire d'État aux Relations avec le Parlement",
     roles: [],
+    photo: ericThill,
   },
 ];
 
@@ -123,10 +155,12 @@ const Gouvernement = () => {
               <h2 className="text-2xl font-light text-primary group-hover:underline mb-4">
                 {governmentMembers[0].name}
               </h2>
-              <div className="bg-gray-200 aspect-[3/4] w-full max-w-[280px] mb-4 overflow-hidden">
-                <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center text-gray-500 text-sm">
-                  Photo
-                </div>
+              <div className="aspect-[3/4] w-full max-w-[280px] mb-4 overflow-hidden">
+                <img 
+                  src={governmentMembers[0].photo} 
+                  alt={governmentMembers[0].name}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
               </div>
               <p className="text-foreground font-medium">
                 {governmentMembers[0].position}
@@ -151,10 +185,12 @@ const Gouvernement = () => {
                 <h3 className="text-xl font-light text-primary group-hover:underline mb-4 text-center">
                   {member.name}
                 </h3>
-                <div className="bg-gray-200 aspect-[3/4] w-full mb-4 overflow-hidden transition-transform duration-300 group-hover:scale-[1.02]">
-                  <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center text-gray-500 text-sm">
-                    Photo
-                  </div>
+                <div className="aspect-[3/4] w-full mb-4 overflow-hidden">
+                  <img 
+                    src={member.photo} 
+                    alt={member.name}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
                 </div>
                 <p className="text-foreground text-sm">
                   {member.position}
