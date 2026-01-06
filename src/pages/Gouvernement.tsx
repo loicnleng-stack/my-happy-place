@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
@@ -23,7 +24,7 @@ const governmentMembers = [
   {
     name: "FRIEDEN Luc",
     position: "Premier ministre",
-    roles: ["Ministre d'État"],
+    roles: [],
     photo: lucFrieden,
     isPremier: true,
   },
@@ -92,8 +93,8 @@ const governmentMembers = [
   },
   {
     name: "GLODEN Léon",
-    position: "Ministre de l'Intérieur",
-    roles: ["Ministre de la Justice"],
+    position: "Ministre des Affaires intérieures",
+    roles: [],
     photo: leonGloden,
   },
   {
@@ -101,102 +102,111 @@ const governmentMembers = [
     position: "Ministre de la Digitalisation",
     roles: [
       "Ministre de la Recherche et de l'Enseignement supérieur",
-      "Ministre de la Culture",
     ],
     photo: stephanieObertin,
   },
   {
     name: "WILMES Serge",
     position: "Ministre de l'Environnement, du Climat et de la Biodiversité",
-    roles: [],
+    roles: ["Ministre de la Fonction publique"],
     photo: sergeWilmes,
   },
   {
     name: "MARGUE Elisabeth",
-    position: "Ministre de la Fonction publique",
-    roles: ["Ministre des Relations avec le Parlement"],
+    position: "Ministre de la Justice",
+    roles: [
+      "Ministre déléguée auprès du Premier ministre, chargée des Médias et de la Connectivité",
+      "Ministre déléguée auprès du Premier ministre, chargée des Relations avec le Parlement",
+    ],
     photo: elisabethMargue,
   },
   {
     name: "THILL Eric",
-    position: "Secrétaire d'État aux Relations avec le Parlement",
-    roles: [],
+    position: "Ministre de la Culture",
+    roles: ["Ministre délégué au Tourisme"],
     photo: ericThill,
   },
 ];
 
 const Gouvernement = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header />
 
       <main className="flex-1">
-        <article className="container py-8 md:py-12 animate-fade-in">
+        <article className="container py-8 md:py-12">
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-light text-primary mb-6">
+          <h1 className="text-4xl md:text-5xl font-light text-[hsl(200,60%,35%)] mb-6">
             Le gouvernement
           </h1>
 
-          {/* Horizontal lines */}
-          <hr className="border-border mb-2" />
-          <hr className="border-border mb-6" />
+          {/* Horizontal line */}
+          <hr className="border-gray-200 mb-6" />
 
           {/* Last modified date */}
-          <div className="text-right text-sm text-muted-foreground mb-12">
+          <div className="text-right text-sm text-gray-500 mb-8">
             Dernière modification le 17.12.2025
           </div>
 
-          {/* Premier ministre - Featured */}
-          <div className="mb-16 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          {/* Premier ministre - Featured with gray background */}
+          <div 
+            className="mb-12 p-6 bg-gray-100 transition-colors duration-200"
+            onMouseEnter={() => setHoveredIndex(0)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
             <Link 
               to="#" 
-              className="group block max-w-md"
+              className="group block"
             >
-              <h2 className="text-2xl font-light text-primary group-hover:underline mb-4">
+              <h2 className="text-2xl font-light text-[hsl(200,60%,35%)] group-hover:underline mb-4">
                 {governmentMembers[0].name}
               </h2>
-              <div className="aspect-[3/4] w-full max-w-[280px] mb-4 overflow-hidden">
-                <img 
-                  src={governmentMembers[0].photo} 
-                  alt={governmentMembers[0].name}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                />
+              <div className="flex flex-col md:flex-row gap-6">
+                <div className="w-full max-w-[280px] overflow-hidden">
+                  <img 
+                    src={governmentMembers[0].photo} 
+                    alt={governmentMembers[0].name}
+                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </div>
+                <div className="flex items-center">
+                  <p className="text-gray-800">
+                    {governmentMembers[0].position}
+                  </p>
+                </div>
               </div>
-              <p className="text-foreground font-medium">
-                {governmentMembers[0].position}
-              </p>
-              {governmentMembers[0].roles.map((role, idx) => (
-                <p key={idx} className="text-foreground text-sm mt-1">
-                  {role}
-                </p>
-              ))}
             </Link>
           </div>
 
           {/* Other ministers grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {governmentMembers.slice(1).map((member, index) => (
               <Link 
                 key={index}
                 to="#"
-                className="group animate-fade-in"
-                style={{ animationDelay: `${0.1 + index * 0.05}s` }}
+                className={`group block p-4 transition-colors duration-200 ${
+                  hoveredIndex === index + 1 ? "bg-[hsl(200,40%,95%)]" : "hover:bg-[hsl(200,40%,95%)]"
+                }`}
+                onMouseEnter={() => setHoveredIndex(index + 1)}
+                onMouseLeave={() => setHoveredIndex(null)}
               >
-                <h3 className="text-xl font-light text-primary group-hover:underline mb-4 text-center">
+                <h3 className="text-xl font-light text-[hsl(200,60%,35%)] group-hover:underline mb-4 text-center">
                   {member.name}
                 </h3>
-                <div className="aspect-[3/4] w-full mb-4 overflow-hidden">
+                <div className="w-full mb-4 overflow-hidden">
                   <img 
                     src={member.photo} 
                     alt={member.name}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]"
                   />
                 </div>
-                <p className="text-foreground text-sm">
+                <p className="text-gray-800 text-sm">
                   {member.position}
                 </p>
                 {member.roles.map((role, idx) => (
-                  <p key={idx} className="text-foreground text-sm mt-1">
+                  <p key={idx} className="text-gray-700 text-sm mt-1">
                     {role}
                   </p>
                 ))}
@@ -205,10 +215,10 @@ const Gouvernement = () => {
           </div>
 
           {/* Link to former members */}
-          <div className="mt-16 pt-8 border-t border-border animate-fade-in">
+          <div className="mt-16 pt-8 border-t border-gray-200">
             <Link 
               to="#" 
-              className="text-primary hover:underline text-lg"
+              className="text-[hsl(200,60%,35%)] hover:underline text-lg"
             >
               Anciens membres du gouvernement →
             </Link>
