@@ -58,10 +58,10 @@ export function Header() {
   ];
 
   const navItems = [
-    { id: "actualites", label: "Actualités", hasDropdown: true },
-    { id: "gouvernement", label: "Le gouvernement", hasDropdown: true },
-    { id: "ministeres", label: "Ministères", hasDropdown: false, href: "#" },
-    { id: "administrations", label: "Administrations", hasDropdown: false, href: "#" },
+    { id: "actualites", label: "Actualités", hasDropdown: true, href: "/actualites" },
+    { id: "gouvernement", label: "Le gouvernement", hasDropdown: true, href: "/gouvernement" },
+    { id: "ministeres", label: "Ministères", hasDropdown: false, href: "/ministeres" },
+    { id: "administrations", label: "Administrations", hasDropdown: false, href: "/administrations" },
     { id: "verification", label: "Vérification de documents", hasDropdown: true, href: "/verification", isActive: location.pathname.startsWith("/verification") },
   ];
 
@@ -144,20 +144,10 @@ export function Header() {
                 onMouseEnter={() => item.hasDropdown && setHoveredNav(item.id)}
                 onMouseLeave={() => setHoveredNav(null)}
               >
-                {item.href && !item.hasDropdown ? (
-                  <Link
-                    to={item.href}
-                    className={`flex items-center gap-1 px-5 py-3 text-[15px] transition-colors ${
-                      item.isActive 
-                        ? "bg-[hsl(200,45%,45%)] text-white" 
-                        : "text-white/90 hover:text-white hover:bg-white/10"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
+                {item.hasDropdown ? (
                   <>
-                    <button
+                    <Link
+                      to={item.href || "#"}
                       className={`flex items-center gap-1 px-5 py-3 text-[15px] transition-colors ${
                         item.isActive || hoveredNav === item.id
                           ? "bg-[hsl(200,45%,45%)] text-white"
@@ -165,30 +155,40 @@ export function Header() {
                       }`}
                     >
                       {item.label}
-                      {item.hasDropdown && (
-                        hoveredNav === item.id 
-                          ? <ChevronUp className="w-3 h-3 ml-1" />
-                          : <ChevronDown className="w-3 h-3 ml-1" />
-                      )}
-                    </button>
+                      {hoveredNav === item.id 
+                        ? <ChevronUp className="w-3 h-3 ml-1" />
+                        : <ChevronDown className="w-3 h-3 ml-1" />
+                      }
+                    </Link>
                     
                     {/* Dropdown menu */}
-                    {item.hasDropdown && hoveredNav === item.id && dropdownData[item.id] && (
+                    {hoveredNav === item.id && dropdownData[item.id] && (
                       <div 
                         className="absolute top-full left-0 bg-[hsl(210,50%,30%)] min-w-[280px] py-2 z-50 shadow-lg"
                       >
                         {dropdownData[item.id].map((subItem, index) => (
-                          <a
+                          <Link
                             key={index}
-                            href={subItem.href}
+                            to={subItem.href}
                             className="block px-5 py-2 text-[14px] text-white/90 hover:text-white hover:bg-white/10 transition-colors"
                           >
                             {subItem.label}
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     )}
                   </>
+                ) : (
+                  <Link
+                    to={item.href || "#"}
+                    className={`flex items-center gap-1 px-5 py-3 text-[15px] transition-colors ${
+                      location.pathname === item.href
+                        ? "bg-[hsl(200,45%,45%)] text-white" 
+                        : "text-white/90 hover:text-white hover:bg-white/10"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
                 )}
               </li>
             ))}

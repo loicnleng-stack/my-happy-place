@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import DocumentVerification from "./pages/DocumentVerification";
 import VisaVerification from "./pages/VisaVerification";
 import Gouvernement from "./pages/Gouvernement";
+import Ministeres from "./pages/Ministeres";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +26,7 @@ const App = () => (
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/gouvernement" element={<Gouvernement />} />
+              <Route path="/ministeres" element={<Ministeres />} />
               <Route path="/verification" element={<DocumentVerification />} />
               <Route path="/verification/visa" element={<VisaVerification />} />
               <Route path="/verification/permis-conduire" element={<DocumentVerification />} />
