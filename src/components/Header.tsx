@@ -35,58 +35,21 @@ export function Header() {
 
   return (
     <header className="w-full">
-      {/* Top bar - white background */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="container flex items-center justify-end py-2 gap-6">
-          {/* Government logo */}
+      {/* Top bar - white background with logo at top right corner */}
+      <div className="bg-white">
+        <div className="flex justify-end py-2 px-4">
+          {/* Government logo - positioned at top right corner */}
           <img 
             src={govLogo} 
             alt="Le Gouvernement du Grand-Duché de Luxembourg" 
-            className="h-10 object-contain"
+            className="h-8 object-contain"
           />
-
-          {/* Language selector */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button className="flex items-center gap-1 text-sm font-medium text-gray-700 hover:text-primary transition-colors">
-                {language}
-                <ChevronDown className="w-3 h-3" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-white border-gray-200 z-50 min-w-[140px]">
-              {languages.map((lang) => (
-                <DropdownMenuItem
-                  key={lang.code}
-                  onClick={() => setLanguage(lang.code)}
-                  className={`cursor-pointer ${language === lang.code ? "bg-gray-100" : ""}`}
-                >
-                  <span className="font-medium mr-2">{lang.code}</span>
-                  <span className="text-gray-500">{lang.label}</span>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Search icon */}
-          <button className="p-1 text-gray-600 hover:text-primary transition-colors">
-            <Search className="w-5 h-5" />
-          </button>
-
-          {/* Mobile menu button */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </Button>
         </div>
       </div>
 
       {/* Middle bar - dark blue gradient with site name */}
       <div className="bg-[hsl(210,50%,25%)] py-4">
-        <div className="container">
+        <div className="container flex items-center justify-between">
           <div className="flex items-center">
             {/* Government label with red separator */}
             <div className="flex items-center">
@@ -101,6 +64,46 @@ export function Header() {
             <h1 className="text-[28px] md:text-[32px] font-light text-white tracking-tight">
               gouvernement.lu
             </h1>
+          </div>
+
+          {/* Language selector and search - in the middle blue bar */}
+          <div className="flex items-center gap-4">
+            {/* Language selector */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="flex items-center gap-1 text-sm font-medium text-white/90 hover:text-white transition-colors">
+                  {language}
+                  <ChevronDown className="w-3 h-3" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="bg-white border-gray-200 z-50 min-w-[140px]">
+                {languages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    onClick={() => setLanguage(lang.code)}
+                    className={`cursor-pointer ${language === lang.code ? "bg-gray-100" : ""}`}
+                  >
+                    <span className="font-medium mr-2">{lang.code}</span>
+                    <span className="text-gray-500">{lang.label}</span>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Search icon */}
+            <button className="p-1 text-white/80 hover:text-white transition-colors">
+              <Search className="w-5 h-5" />
+            </button>
+
+            {/* Mobile menu button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-white hover:bg-white/10"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
           </div>
         </div>
       </div>
