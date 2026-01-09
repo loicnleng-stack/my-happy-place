@@ -6,8 +6,6 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
-  hasSelectedLanguage: boolean;
-  setHasSelectedLanguage: (value: boolean) => void;
 }
 
 const translations: Record<Language, Record<string, string>> = {
@@ -432,19 +430,10 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem("selectedLanguage");
     return (saved as Language) || "FR";
   });
-  
-  const [hasSelectedLanguage, setHasSelectedLanguageState] = useState(() => {
-    return localStorage.getItem("hasSelectedLanguage") === "true";
-  });
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem("selectedLanguage", lang);
-  };
-
-  const setHasSelectedLanguage = (value: boolean) => {
-    setHasSelectedLanguageState(value);
-    localStorage.setItem("hasSelectedLanguage", value.toString());
   };
 
   const t = (key: string): string => {
@@ -452,7 +441,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t, hasSelectedLanguage, setHasSelectedLanguage }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t }}>
       {children}
     </LanguageContext.Provider>
   );
