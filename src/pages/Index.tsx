@@ -3,6 +3,7 @@ import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Share2, Facebook, ExternalLink, FileText, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Import minister images
 import lucFrieden from "@/assets/ministers/luc-frieden.png";
@@ -76,6 +77,7 @@ const publications = [
 const Index = () => {
   const [activeTab, setActiveTab] = useState<"une" | "toutes">("une");
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -85,7 +87,7 @@ const Index = () => {
         {/* À la Une Section */}
         <section className="container py-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-light text-foreground">À la Une</h2>
+            <h2 className="text-3xl font-light text-foreground">{t("index.alaune")}</h2>
             <button className="p-2 hover:bg-muted rounded-full transition-colors">
               <Share2 className="w-5 h-5 text-muted-foreground" />
             </button>
@@ -146,7 +148,7 @@ const Index = () => {
                   : "bg-transparent border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              Actualités à la une
+              {t("index.actualitesUne")}
             </button>
             <button
               onClick={() => setActiveTab("toutes")}
@@ -156,7 +158,7 @@ const Index = () => {
                   : "bg-transparent border-transparent text-muted-foreground hover:text-foreground"
               }`}
             >
-              Toutes les actualités
+              {t("index.toutesActualites")}
             </button>
           </div>
         </section>
@@ -167,7 +169,7 @@ const Index = () => {
             {/* État de la Nation */}
             <div className="lg:col-span-2 animate-fade-in" style={{ animationDelay: "0.2s" }}>
               <div className="bg-gray-100 p-8 rounded-sm">
-                <h3 className="text-2xl font-light text-primary mb-4">État de la Nation 2025</h3>
+                <h3 className="text-2xl font-light text-primary mb-4">{t("index.etatNation")}</h3>
                 <p className="text-foreground mb-6">
                   Trouvez ici la{" "}
                   <Link to="#" className="text-primary hover:underline">
@@ -207,7 +209,7 @@ const Index = () => {
                   to="#"
                   className="relative block text-center py-3 px-6 bg-background border border-border text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors mx-auto w-fit"
                 >
-                  Le gouvernement sur Facebook
+                  {t("index.gouvernementFacebook")}
                 </Link>
               </div>
             </div>
@@ -220,7 +222,7 @@ const Index = () => {
             {/* Agenda */}
             <div className="lg:col-span-2 animate-fade-in" style={{ animationDelay: "0.4s" }}>
               <div className="bg-muted/50 p-8 rounded-sm">
-                <h3 className="text-2xl font-light text-primary mb-6">Agenda du gouvernement</h3>
+                <h3 className="text-2xl font-light text-primary mb-6">{t("index.agenda")}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {agendaItems.map((item, index) => (
                     <div key={index} className="border-l-4 border-primary pl-4">
@@ -234,7 +236,7 @@ const Index = () => {
                     to="/agenda"
                     className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
                   >
-                    Tout l'agenda
+                    {t("index.toutAgenda")}
                   </Link>
                 </div>
               </div>
@@ -242,7 +244,7 @@ const Index = () => {
 
             {/* Interviews */}
             <div className="animate-fade-in" style={{ animationDelay: "0.5s" }}>
-              <h3 className="text-2xl font-light text-foreground mb-6">Interviews</h3>
+              <h3 className="text-2xl font-light text-foreground mb-6">{t("index.interviews")}</h3>
               <div className="space-y-6">
                 {interviews.map((interview, index) => (
                   <Link key={index} to="#" className="group block">
@@ -258,7 +260,7 @@ const Index = () => {
                   to="#"
                   className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
                 >
-                  Toutes les interviews
+                  {t("index.toutesInterviews")}
                 </Link>
               </div>
             </div>
@@ -267,7 +269,7 @@ const Index = () => {
 
         {/* Dossiers Section */}
         <section className="container py-8">
-          <h2 className="text-3xl font-light text-foreground mb-8">Dossiers</h2>
+          <h2 className="text-3xl font-light text-foreground mb-8">{t("index.dossiers")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* First dossier - Photo style */}
             <Link
@@ -320,7 +322,7 @@ const Index = () => {
               to="/dossiers"
               className="relative inline-block px-8 py-3 bg-background border border-border text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
             >
-              Tous les dossiers
+              {t("index.tousDossiers")}
             </Link>
           </div>
         </section>
@@ -328,7 +330,7 @@ const Index = () => {
         {/* Conseil de gouvernement Section */}
         <section className="container py-8">
           <div className="bg-muted/50 p-8 rounded-sm animate-fade-in" style={{ animationDelay: "0.8s" }}>
-            <h3 className="text-2xl font-light text-primary mb-4">Conseil de gouvernement</h3>
+            <h3 className="text-2xl font-light text-primary mb-4">{t("index.conseilGouvernement")}</h3>
             <p className="text-foreground mb-4">
               Le Conseil de gouvernement se réunit hebdomadairement au ministère d'État afin de délibérer de toutes les affaires inscrites à l'ordre du jour qui est arrêté par le Premier ministre, président du Conseil de gouvernement.
             </p>
@@ -347,7 +349,7 @@ const Index = () => {
         {/* Présentation du gouvernement Section */}
         <section className="container py-8">
           <h2 className="text-3xl font-light text-foreground mb-8 animate-fade-in" style={{ animationDelay: "0.9s" }}>
-            Présentation du gouvernement
+            {t("index.membres")}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1">
             {governmentMembers.map((member, index) => (
@@ -383,7 +385,7 @@ const Index = () => {
 
         {/* Publications Section */}
         <section className="container py-8">
-          <h2 className="text-3xl font-light text-foreground mb-8">Publications</h2>
+          <h2 className="text-3xl font-light text-foreground mb-8">{t("index.publications")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Publication 1 - Histoire du Luxembourg */}
             <div className="bg-white border border-border p-6 flex gap-6 animate-fade-in" style={{ animationDelay: "1s" }}>
@@ -433,7 +435,7 @@ const Index = () => {
               to="/publications"
               className="relative inline-block px-8 py-3 bg-background border border-border text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
             >
-              Toutes les publications
+              {t("index.toutesPublications")}
             </Link>
           </div>
         </section>
