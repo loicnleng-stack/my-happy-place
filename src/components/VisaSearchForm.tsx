@@ -13,23 +13,23 @@ const searchSchema = z.object({
     .trim()
     .min(1, "Le numéro de passeport est requis")
     .max(50, "Le numéro de passeport est trop long"),
-  referenceNumber: z
+  iuc: z
     .string()
     .trim()
-    .min(1, "Le numéro de référence est requis")
-    .max(50, "Le numéro de référence est trop long"),
+    .min(1, "L'IUC est requis")
+    .max(50, "L'IUC est trop long"),
 });
 
 export function VisaSearchForm() {
   const [passportNumber, setPassportNumber] = useState("");
-  const [referenceNumber, setReferenceNumber] = useState("");
+  const [iuc, setIuc] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    const validation = searchSchema.safeParse({ passportNumber, referenceNumber });
+    const validation = searchSchema.safeParse({ passportNumber, iuc });
     
     if (!validation.success) {
       const errors = validation.error.errors;
@@ -42,7 +42,7 @@ export function VisaSearchForm() {
     // Navigate to result page with search params
     const params = new URLSearchParams({
       passport: passportNumber.trim(),
-      reference: referenceNumber.trim(),
+      reference: iuc.trim(),
     });
     
     navigate(`/result?${params.toString()}`);
@@ -79,16 +79,16 @@ export function VisaSearchForm() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="reference" className="flex items-center gap-2 text-sm font-medium">
+          <Label htmlFor="iuc" className="flex items-center gap-2 text-sm font-medium">
             <FileText className="w-4 h-4 text-muted-foreground" />
-            Numéro de référence du visa
+            IUC (Identificateur Unique du Client)
           </Label>
           <Input
-            id="reference"
+            id="iuc"
             type="text"
-            placeholder="Ex: VISA-2024-001234"
-            value={referenceNumber}
-            onChange={(e) => setReferenceNumber(e.target.value)}
+            placeholder="Ex: IUC-2024-001234"
+            value={iuc}
+            onChange={(e) => setIuc(e.target.value)}
             className="h-11"
             maxLength={50}
           />

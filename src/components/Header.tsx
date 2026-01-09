@@ -76,7 +76,7 @@ export function Header() {
     { id: "gouvernement", label: t("nav.gouvernement"), hasDropdown: true, href: "/gouvernement" },
     { id: "ministeres", label: t("nav.ministeres"), hasDropdown: false, href: "/ministeres" },
     { id: "administrations", label: t("nav.administrations"), hasDropdown: false, href: "/administrations" },
-    { id: "dossiers", label: t("nav.dossiers"), hasDropdown: false, href: "#" },
+    { id: "verification", label: t("nav.verificationDocuments"), hasDropdown: true, href: "/verification" },
     { id: "systemePolitique", label: t("nav.systemePolitique"), hasDropdown: true, href: "/systeme-politique", isActive: location.pathname.startsWith("/systeme-politique") },
   ];
 
