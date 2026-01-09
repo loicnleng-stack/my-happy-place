@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { ChevronRight, ExternalLink, Search } from "lucide-react";
+import { ChevronRight, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ministeres = [
   { name: "Ministère d'État", code: "ME", url: "#" },
@@ -30,6 +31,7 @@ const ministeres = [
 export default function Ministeres() {
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   const filteredMinisteres = ministeres.filter((m) =>
     m.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -42,25 +44,25 @@ export default function Ministeres() {
       <main className="flex-1 container py-8">
         {/* Title */}
         <h1 className="text-4xl md:text-5xl font-light text-[hsl(200,60%,35%)] mb-8">
-          Ministères
+          {t("ministeres.title")}
         </h1>
 
         <hr className="border-gray-200 mb-6" />
 
         {/* Last modified */}
         <div className="text-right text-sm text-gray-500 mb-6">
-          Dernière modification le 14.08.2024
+          {t("common.lastModified")} 14.08.2024
         </div>
 
         {/* Search filter */}
         <div className="flex flex-col md:flex-row md:items-center gap-4 mb-6">
           <label className="font-medium text-gray-700 whitespace-nowrap">
-            Filtrer par ministères
+            {t("ministeres.filter")}
           </label>
           <div className="relative flex-1 max-w-2xl">
             <Input
               type="text"
-              placeholder="Par exemple: Ministère de la Justice"
+              placeholder={t("ministeres.placeholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full border-gray-300 focus:border-[hsl(200,60%,35%)] focus:ring-[hsl(200,60%,35%)]"
@@ -70,7 +72,7 @@ export default function Ministeres() {
 
         {/* Count */}
         <p className="text-gray-700 mb-4">
-          Nombre de ministères affichés : {filteredMinisteres.length} sur {ministeres.length}
+          {t("ministeres.count")} : {filteredMinisteres.length} {t("ministeres.of")} {ministeres.length}
         </p>
 
         {/* List */}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Import minister photos
 import lucFrieden from "@/assets/ministers/luc-frieden.png";
@@ -130,6 +131,7 @@ const governmentMembers = [
 
 const Gouvernement = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -139,7 +141,7 @@ const Gouvernement = () => {
         <article className="container py-8 md:py-12">
           {/* Title */}
           <h1 className="text-4xl md:text-5xl font-light text-[hsl(200,60%,35%)] mb-6">
-            Le gouvernement
+            {t("gouv.title")}
           </h1>
 
           {/* Horizontal line */}
@@ -147,7 +149,7 @@ const Gouvernement = () => {
 
           {/* Last modified date */}
           <div className="text-right text-sm text-gray-500 mb-8">
-            Dernière modification le 17.12.2025
+            {t("common.lastModified")} 17.12.2025
           </div>
 
           {/* Premier ministre - Featured with gray background */}
@@ -173,7 +175,7 @@ const Gouvernement = () => {
                 </div>
                 <div className="flex items-center">
                   <p className="text-gray-800">
-                    {governmentMembers[0].position}
+                    {t("gouv.premierMinistre")}
                   </p>
                 </div>
               </div>
@@ -220,7 +222,7 @@ const Gouvernement = () => {
               to="#" 
               className="text-[hsl(200,60%,35%)] hover:underline text-lg"
             >
-              Anciens membres du gouvernement →
+              {t("gouv.formerMembers")} →
             </Link>
           </div>
         </article>
