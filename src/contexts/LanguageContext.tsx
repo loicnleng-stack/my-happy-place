@@ -22,6 +22,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.ministeres": "Ministères",
     "nav.administrations": "Administrations",
     "nav.dossiers": "Dossiers",
+    "nav.verificationDocuments": "Vérification de documents",
     "nav.systemePolitique": "Système politique",
     
     // Header
@@ -125,6 +126,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.ministeres": "Ministries",
     "nav.administrations": "Administrations",
     "nav.dossiers": "Topics",
+    "nav.verificationDocuments": "Document Verification",
     "nav.systemePolitique": "Political system",
     
     // Header
@@ -228,6 +230,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.ministeres": "Ministerien",
     "nav.administrations": "Verwaltungen",
     "nav.dossiers": "Themen",
+    "nav.verificationDocuments": "Dokumentenprüfung",
     "nav.systemePolitique": "Politisches System",
     
     // Header
@@ -331,6 +334,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.ministeres": "Ministèren",
     "nav.administrations": "Administratiounen",
     "nav.dossiers": "Dossieren",
+    "nav.verificationDocuments": "Dokumenter Iwwerpréiwen",
     "nav.systemePolitique": "Politesche System",
     
     // Header
