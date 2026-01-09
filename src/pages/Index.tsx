@@ -96,43 +96,43 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main News */}
             <div className="lg:col-span-2 animate-fade-in">
-              <Link to="/actualites" className="group block">
+              <div className="group block cursor-default">
                 <div className="aspect-video overflow-hidden rounded-sm">
                   <img 
                     src={conferencePresse} 
                     alt="Conférence de presse" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-semibold text-primary mt-4 group-hover:underline transition-colors">
+                <h3 className="text-xl font-semibold text-primary mt-4">
                   Présentation d&apos;un paquet de mesures &quot;Mateneen. Fir all Famill. Fir all Kand.&quot;: classe d&apos;impôt unique, chèque-service accueil, allocation familiale
                 </h3>
                 <p className="text-sm text-primary mt-2">06.01.2026</p>
                 <p className="text-muted-foreground mt-2">Le livestreaming débute vers 10h30.</p>
-              </Link>
+              </div>
             </div>
 
             {/* Side News */}
             <div className="space-y-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              <Link to="/actualites" className="group block">
-                <h3 className="text-lg font-semibold text-primary group-hover:underline">
+              <div className="block cursor-default">
+                <h3 className="text-lg font-semibold text-primary">
                   Nouveautés 2026
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">29.12.2025</p>
                 <p className="text-sm text-foreground mt-2">
                   De nouvelles dispositions légales et réglementaires concernant directement le citoyen vont entrer en vigueur en 2026. Voici un aperçu des principaux changements qui ont un impact direct sur les citoyens. Cette liste n&apos;est pas exhaustive.
                 </p>
-              </Link>
+              </div>
 
-              <Link to="/actualites" className="group block">
-                <h3 className="text-lg font-semibold text-primary group-hover:underline">
+              <div className="block cursor-default">
+                <h3 className="text-lg font-semibold text-primary">
                   Communiqué du gouvernement luxembourgeois sur la situation au Venezuela
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">04.01.2026</p>
                 <p className="text-sm text-foreground mt-2">
                   Le gouvernement suit de près les événements au Venezuela, suite à l&apos;opération militaire américaine lors de laquelle Nicolas Maduro et son épouse ont été capturés et transférés en dehors du pays.
                 </p>
-              </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -172,9 +172,9 @@ const Index = () => {
                 <h3 className="text-2xl font-light text-primary mb-4">{t("index.etatNation")}</h3>
                 <p className="text-foreground mb-6">
                   Trouvez ici la{" "}
-                  <Link to="#" className="text-primary hover:underline">
+                  <span className="text-primary">
                     déclaration de politique générale sur l&apos;état de la nation 2025 par Luc Frieden
-                  </Link>{" "}
+                  </span>{" "}
                   ainsi que les illustrations correspondantes.
                 </p>
                 {/* Visual Card - Using actual image */}
@@ -205,12 +205,11 @@ const Index = () => {
               </div>
               <div className="relative">
                 <div className="absolute inset-x-0 top-1/2 border-t border-border"></div>
-                <Link
-                  to="#"
-                  className="relative block text-center py-3 px-6 bg-background border border-border text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors mx-auto w-fit"
+                <span
+                  className="relative block text-center py-3 px-6 bg-background border border-border text-sm font-medium uppercase tracking-wide cursor-default mx-auto w-fit"
                 >
                   {t("index.gouvernementFacebook")}
-                </Link>
+                </span>
               </div>
             </div>
           </div>
@@ -232,12 +231,11 @@ const Index = () => {
                   ))}
                 </div>
                 <div className="text-center mt-8">
-                  <Link
-                    to="/agenda"
-                    className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
+                  <span
+                    className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide cursor-default"
                   >
                     {t("index.toutAgenda")}
-                  </Link>
+                  </span>
                 </div>
               </div>
             </div>
@@ -247,21 +245,20 @@ const Index = () => {
               <h3 className="text-2xl font-light text-foreground mb-6">{t("index.interviews")}</h3>
               <div className="space-y-6">
                 {interviews.map((interview, index) => (
-                  <Link key={index} to="#" className="group block">
-                    <h4 className="text-lg font-semibold text-primary group-hover:underline">
+                  <div key={index} className="block cursor-default">
+                    <h4 className="text-lg font-semibold text-primary">
                       {interview.title}
                     </h4>
                     <p className="text-sm text-muted-foreground mt-1">{interview.source}</p>
-                  </Link>
+                  </div>
                 ))}
               </div>
               <div className="mt-8">
-                <Link
-                  to="#"
-                  className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
+                <span
+                  className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide cursor-default"
                 >
                   {t("index.toutesInterviews")}
-                </Link>
+                </span>
               </div>
             </div>
           </div>
@@ -272,27 +269,25 @@ const Index = () => {
           <h2 className="text-3xl font-light text-foreground mb-8">{t("index.dossiers")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* First dossier - Photo style */}
-            <Link
-              to="#"
-              className="group block animate-fade-in"
+            <div
+              className="block animate-fade-in cursor-default"
               style={{ animationDelay: "0.6s" }}
             >
               <div className="aspect-video overflow-hidden rounded-sm">
                 <img
                   src={dossierGouvernement}
                   alt="La formation du gouvernement 2023"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-semibold text-primary mt-4 group-hover:underline">
+              <h3 className="text-xl font-semibold text-primary mt-4">
                 La formation du gouvernement 2023
               </h3>
-            </Link>
+            </div>
 
             {/* Second dossier - Card with description */}
-            <Link
-              to="#"
-              className="group block animate-fade-in"
+            <div
+              className="block animate-fade-in cursor-default"
               style={{ animationDelay: "0.7s" }}
             >
               <div className="relative">
@@ -301,12 +296,12 @@ const Index = () => {
                   <img 
                     src={dossierAccessibilite} 
                     alt="Accessibilité numérique" 
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 {/* Description box */}
                 <div className="bg-sky-50 p-4">
-                  <h3 className="text-lg font-semibold text-primary group-hover:underline">
+                  <h3 className="text-lg font-semibold text-primary">
                     L&apos;engagement du gouvernement pour l&apos;accessibilité numérique
                   </h3>
                   <p className="text-sm text-foreground mt-2">
@@ -314,16 +309,15 @@ const Index = () => {
                   </p>
                 </div>
               </div>
-            </Link>
+            </div>
           </div>
           <div className="text-center mt-8 relative">
             <div className="absolute inset-x-0 top-1/2 border-t border-border"></div>
-            <Link
-              to="/dossiers"
-              className="relative inline-block px-8 py-3 bg-background border border-border text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
+            <span
+              className="relative inline-block px-8 py-3 bg-background border border-border text-sm font-medium uppercase tracking-wide cursor-default"
             >
               {t("index.tousDossiers")}
-            </Link>
+            </span>
           </div>
         </section>
 
@@ -336,12 +330,11 @@ const Index = () => {
             </p>
             <p className="text-foreground mb-6">Les communiqués du Conseil de gouvernement sont en français.</p>
             <div className="text-center">
-              <Link
-                to="#"
-                className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
+              <span
+                className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide cursor-default"
               >
                 {t("index.tousCommuniques")}
-              </Link>
+              </span>
             </div>
           </div>
         </section>
@@ -431,12 +424,11 @@ const Index = () => {
           </div>
           <div className="text-center mt-8 relative">
             <div className="absolute inset-x-0 top-1/2 border-t border-border"></div>
-            <Link
-              to="/publications"
-              className="relative inline-block px-8 py-3 bg-background border border-border text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
+            <span
+              className="relative inline-block px-8 py-3 bg-background border border-border text-sm font-medium uppercase tracking-wide cursor-default"
             >
               {t("index.toutesPublications")}
-            </Link>
+            </span>
           </div>
         </section>
 

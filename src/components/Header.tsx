@@ -12,12 +12,12 @@ import {
 import govLogo from "@/assets/gov-logo.png";
 
 // Dropdown data for each menu
-const dropdownData: Record<string, { label: string; href: string }[]> = {
+const dropdownData: Record<string, { label: string; href: string | null }[]> = {
   actualites: [
-    { label: "Toutes les actualités", href: "#" },
-    { label: "Conseils de gouvernement", href: "#" },
-    { label: "Agenda", href: "#" },
-    { label: "Conférences de presse en vidéo", href: "#" },
+    { label: "Toutes les actualités", href: null },
+    { label: "Conseils de gouvernement", href: null },
+    { label: "Agenda", href: null },
+    { label: "Conférences de presse en vidéo", href: null },
   ],
   gouvernement: [
     { label: "Luc FRIEDEN", href: "/gouvernement" },
@@ -182,13 +182,22 @@ export function Header() {
                         className="absolute top-full left-0 bg-[hsl(210,50%,30%)] min-w-[280px] py-2 z-50 shadow-lg"
                       >
                         {dropdownData[item.id].map((subItem, index) => (
-                          <Link
-                            key={index}
-                            to={subItem.href}
-                            className="block px-5 py-2 text-[14px] text-white/90 hover:text-white hover:bg-white/10 transition-colors"
-                          >
-                            {subItem.label}
-                          </Link>
+                          subItem.href ? (
+                            <Link
+                              key={index}
+                              to={subItem.href}
+                              className="block px-5 py-2 text-[14px] text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+                            >
+                              {subItem.label}
+                            </Link>
+                          ) : (
+                            <span
+                              key={index}
+                              className="block px-5 py-2 text-[14px] text-white/90 cursor-default"
+                            >
+                              {subItem.label}
+                            </span>
+                          )
                         ))}
                       </div>
                     )}
