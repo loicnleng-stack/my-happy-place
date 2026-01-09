@@ -340,7 +340,7 @@ const Index = () => {
                 to="#"
                 className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide hover:bg-muted transition-colors"
               >
-                Tous les communiqués du conseil de gouvernement
+                {t("index.tousCommuniques")}
               </Link>
             </div>
           </div>

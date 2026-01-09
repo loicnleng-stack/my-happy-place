@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ChevronRight, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const administrations = [
   { name: "Administration d'évaluation et de contrôle de l'assurance dépendance", external: false },
@@ -101,6 +102,7 @@ const administrations = [
 
 export default function Administrations() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -109,19 +111,19 @@ export default function Administrations() {
       <main className="flex-1 container py-8">
         {/* Title */}
         <h1 className="text-4xl md:text-5xl font-light text-[hsl(200,60%,35%)] mb-8">
-          Administrations
+          {t("admin.title")}
         </h1>
 
         <hr className="border-gray-200 mb-6" />
 
         {/* Last modified */}
         <div className="text-right text-sm text-gray-500 mb-6">
-          Dernière modification le 22.05.2025
+          {t("common.lastModified")} 22.05.2025
         </div>
 
         {/* Section title */}
         <h2 className="text-xl font-semibold text-gray-800 mb-4 pb-2 border-b border-gray-200">
-          Administrations
+          {t("admin.title")}
         </h2>
 
         {/* List */}
@@ -146,7 +148,7 @@ export default function Administrations() {
               <span className="flex-1 text-[hsl(200,60%,40%)] hover:underline transition-colors">
                 {admin.name}
                 {admin.external && (
-                  <span className="text-[hsl(200,60%,40%)] ml-1">- site externe</span>
+                  <span className="text-[hsl(200,60%,40%)] ml-1">- {t("admin.externalSite")}</span>
                 )}
               </span>
               <ExternalLink 
