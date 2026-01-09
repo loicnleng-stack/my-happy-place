@@ -61,7 +61,7 @@ const dropdownData: Record<string, { label: string; href: string }[]> = {
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
 
   const languages = [
@@ -72,12 +72,12 @@ export function Header() {
   ];
 
   const navItems = [
-    { id: "actualites", label: "Actualités", hasDropdown: true, href: "/" },
-    { id: "gouvernement", label: "Le gouvernement", hasDropdown: true, href: "/gouvernement" },
-    { id: "ministeres", label: "Ministères", hasDropdown: false, href: "/ministeres" },
-    { id: "administrations", label: "Administrations", hasDropdown: false, href: "/administrations" },
-    { id: "dossiers", label: "Dossiers", hasDropdown: false, href: "#" },
-    { id: "systemePolitique", label: "Système politique", hasDropdown: true, href: "/systeme-politique", isActive: location.pathname.startsWith("/systeme-politique") },
+    { id: "actualites", label: t("nav.actualites"), hasDropdown: true, href: "/" },
+    { id: "gouvernement", label: t("nav.gouvernement"), hasDropdown: true, href: "/gouvernement" },
+    { id: "ministeres", label: t("nav.ministeres"), hasDropdown: false, href: "/ministeres" },
+    { id: "administrations", label: t("nav.administrations"), hasDropdown: false, href: "/administrations" },
+    { id: "dossiers", label: t("nav.dossiers"), hasDropdown: false, href: "#" },
+    { id: "systemePolitique", label: t("nav.systemePolitique"), hasDropdown: true, href: "/systeme-politique", isActive: location.pathname.startsWith("/systeme-politique") },
   ];
 
   return (
@@ -99,8 +99,8 @@ export function Header() {
           <div className="flex items-center">
             <div className="flex items-center">
               <div className="pr-4">
-                <p className="text-[13px] text-white/80 leading-tight">Le gouvernement</p>
-                <p className="text-[13px] text-white/80 leading-tight">luxembourgeois</p>
+              <p className="text-[13px] text-white/80 leading-tight">{t("header.government")}</p>
+                <p className="text-[13px] text-white/80 leading-tight">{t("header.subtitle")}</p>
               </div>
               <div className="w-[2px] h-10 bg-[hsl(0,75%,45%)] mr-4"></div>
             </div>
@@ -218,7 +218,7 @@ export function Header() {
             <Link to="/" className="text-gray-500 hover:text-primary transition-colors">
               <Home className="w-4 h-4" />
             </Link>
-            <span className="text-primary font-medium">Système politique</span>
+            <span className="text-primary font-medium">{t("breadcrumb.systemePolitique")}</span>
           </div>
           <div className="flex items-center gap-2">
             <button className="p-1.5 text-gray-400 hover:text-gray-600 transition-colors">
