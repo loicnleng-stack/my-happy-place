@@ -17,9 +17,9 @@ export function Footer() {
               </h3>
               <ul className="space-y-2 text-sm text-primary-foreground/80">
                 <li>
-                  <Link to="/actualites" className="hover:text-primary-foreground transition-colors">
+                  <span className="cursor-default">
                     {t("nav.actualites")}
-                  </Link>
+                  </span>
                 </li>
                 <li>
                   <Link to="/gouvernement" className="hover:text-primary-foreground transition-colors font-semibold text-primary-foreground">
@@ -27,9 +27,9 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/ministeres" className="hover:text-primary-foreground transition-colors">
+                  <span className="cursor-default">
                     {t("nav.ministeres")}
-                  </Link>
+                  </span>
                 </li>
                 <li>
                   <Link to="/administrations" className="hover:text-primary-foreground transition-colors">
@@ -37,33 +37,33 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/dossiers" className="hover:text-primary-foreground transition-colors">
+                  <span className="cursor-default">
                     {t("nav.dossiers")}
-                  </Link>
+                  </span>
                 </li>
               </ul>
             </div>
             <div className="pt-9">
               <ul className="space-y-2 text-sm text-primary-foreground/80">
                 <li>
-                  <Link to="/" className="hover:text-primary-foreground transition-colors">
+                  <Link to="/systeme-politique" className="hover:text-primary-foreground transition-colors">
                     {t("nav.systemePolitique")}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/publications" className="hover:text-primary-foreground transition-colors">
+                  <span className="cursor-default">
                     {t("footer.publications")}
-                  </Link>
+                  </span>
                 </li>
                 <li>
-                  <Link to="/conferences" className="hover:text-primary-foreground transition-colors">
+                  <span className="cursor-default">
                     {t("footer.conferences")}
-                  </Link>
+                  </span>
                 </li>
                 <li>
-                  <Link to="/agenda" className="hover:text-primary-foreground transition-colors">
+                  <span className="cursor-default">
                     {t("footer.agenda")}
-                  </Link>
+                  </span>
                 </li>
               </ul>
             </div>
@@ -76,34 +76,34 @@ export function Footer() {
             </h3>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <span className="cursor-default">
                   {t("footer.contact")}
-                </a>
+                </span>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <span className="cursor-default">
                   {t("footer.sitemap")}
-                </a>
+                </span>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <span className="cursor-default">
                   {t("footer.about")}
-                </a>
+                </span>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <span className="cursor-default">
                   {t("footer.legalAspects")}
-                </a>
+                </span>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <span className="cursor-default">
                   {t("footer.accessibilityStatement")}
-                </a>
+                </span>
               </li>
               <li>
-                <a href="#" className="hover:text-primary-foreground transition-colors">
+                <span className="cursor-default">
                   {t("footer.cookies")}
-                </a>
+                </span>
               </li>
             </ul>
           </div>
@@ -114,66 +114,49 @@ export function Footer() {
               {t("footer.stayConnected")}
             </h3>
             <div className="flex items-center gap-3 mb-6">
-              <a 
-                href="https://twitter.com/goulouxembourg" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-primary-foreground rounded-full flex items-center justify-center hover:opacity-80 transition-opacity"
+              <span 
+                className="w-9 h-9 bg-primary-foreground rounded-full flex items-center justify-center cursor-default"
                 title="Twitter"
               >
                 <span className="text-primary font-bold text-lg">𝕏</span>
-              </a>
-              <a 
-                href="https://facebook.com/gouvernement.lu" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center hover:bg-primary-foreground/30 transition-colors"
+              </span>
+              <span 
+                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center cursor-default"
                 title="Facebook"
               >
                 <Facebook className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://instagram.com/gouvernement.lu" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center hover:bg-primary-foreground/30 transition-colors"
+              </span>
+              <span 
+                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center cursor-default"
                 title="Instagram"
               >
                 <Instagram className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://linkedin.com/company/gouvernement-luxembourgeois" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center hover:bg-primary-foreground/30 transition-colors"
+              </span>
+              <span 
+                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center cursor-default"
                 title="LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
-              </a>
-              <a 
-                href="https://youtube.com/gouvernementlu" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center hover:bg-primary-foreground/30 transition-colors"
+              </span>
+              <span 
+                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center cursor-default"
                 title="YouTube"
               >
                 <Youtube className="w-4 h-4" />
-              </a>
-              <a 
-                href="#" 
-                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center hover:bg-primary-foreground/30 transition-colors"
+              </span>
+              <span 
+                className="w-9 h-9 bg-primary-foreground/20 rounded-full flex items-center justify-center cursor-default"
                 title="RSS"
               >
                 <Rss className="w-4 h-4" />
-              </a>
+              </span>
             </div>
-            <a 
-              href="#" 
-              className="inline-flex items-center gap-2 text-sm text-primary-foreground hover:underline"
+            <span 
+              className="inline-flex items-center gap-2 text-sm text-primary-foreground cursor-default"
             >
               <Instagram className="w-4 h-4" />
               <span className="uppercase font-semibold tracking-wide">{t("footer.newsletter")}</span>
-            </a>
+            </span>
           </div>
         </div>
       </div>
