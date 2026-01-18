@@ -105,10 +105,10 @@ const Index = () => {
                   />
                 </div>
                 <h3 className="text-xl font-semibold text-primary mt-4">
-                  Présentation d&apos;un paquet de mesures &quot;Mateneen. Fir all Famill. Fir all Kand.&quot;: classe d&apos;impôt unique, chèque-service accueil, allocation familiale
+                  {t("index.newsMain.title")}
                 </h3>
-                <p className="text-sm text-primary mt-2">06.01.2026</p>
-                <p className="text-muted-foreground mt-2">Le livestreaming débute vers 10h30.</p>
+                <p className="text-sm text-primary mt-2">{t("index.newsMain.date")}</p>
+                <p className="text-muted-foreground mt-2">{t("index.newsMain.desc")}</p>
               </div>
             </div>
 
@@ -116,21 +116,21 @@ const Index = () => {
             <div className="space-y-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               <div className="block cursor-default">
                 <h3 className="text-lg font-semibold text-primary">
-                  Nouveautés 2026
+                  {t("index.newsSide1.title")}
                 </h3>
-                <p className="text-sm text-muted-foreground mt-1">29.12.2025</p>
+                <p className="text-sm text-muted-foreground mt-1">{t("index.newsSide1.date")}</p>
                 <p className="text-sm text-foreground mt-2">
-                  De nouvelles dispositions légales et réglementaires concernant directement le citoyen vont entrer en vigueur en 2026. Voici un aperçu des principaux changements qui ont un impact direct sur les citoyens. Cette liste n&apos;est pas exhaustive.
+                  {t("index.newsSide1.desc")}
                 </p>
               </div>
 
               <div className="block cursor-default">
                 <h3 className="text-lg font-semibold text-primary">
-                  Communiqué du gouvernement luxembourgeois sur la situation au Venezuela
+                  {t("index.newsSide2.title")}
                 </h3>
-                <p className="text-sm text-muted-foreground mt-1">04.01.2026</p>
+                <p className="text-sm text-muted-foreground mt-1">{t("index.newsSide2.date")}</p>
                 <p className="text-sm text-foreground mt-2">
-                  Le gouvernement suit de près les événements au Venezuela, suite à l&apos;opération militaire américaine lors de laquelle Nicolas Maduro et son épouse ont été capturés et transférés en dehors du pays.
+                  {t("index.newsSide2.desc")}
                 </p>
               </div>
             </div>
@@ -171,11 +171,7 @@ const Index = () => {
               <div className="bg-gray-100 p-8 rounded-sm">
                 <h3 className="text-2xl font-light text-primary mb-4">{t("index.etatNation")}</h3>
                 <p className="text-foreground mb-6">
-                  Trouvez ici la{" "}
-                  <span className="text-primary">
-                    déclaration de politique générale sur l&apos;état de la nation 2025 par Luc Frieden
-                  </span>{" "}
-                  ainsi que les illustrations correspondantes.
+                  {t("index.etatNation.desc")}
                 </p>
                 {/* Visual Card - Using actual image */}
                 <div className="rounded-sm overflow-hidden">
@@ -197,7 +193,7 @@ const Index = () => {
                 </div>
                 <div>
                   <p className="font-semibold text-sm">Gouvernement luxembourgeois</p>
-                  <p className="text-xs text-muted-foreground">il y a 6 jours</p>
+                  <p className="text-xs text-muted-foreground">{t("index.facebook.posted")}</p>
                 </div>
               </div>
               <div className="aspect-square bg-muted mb-6 overflow-hidden">
@@ -281,7 +277,7 @@ const Index = () => {
                 />
               </div>
               <h3 className="text-xl font-semibold text-primary mt-4">
-                La formation du gouvernement 2023
+                {t("index.dossier1.title")}
               </h3>
             </div>
 
@@ -302,10 +298,10 @@ const Index = () => {
                 {/* Description box */}
                 <div className="bg-sky-50 p-4">
                   <h3 className="text-lg font-semibold text-primary">
-                    L&apos;engagement du gouvernement pour l&apos;accessibilité numérique
+                    {t("index.dossier2.title")}
                   </h3>
                   <p className="text-sm text-foreground mt-2">
-                    L&apos;égalité est un des principes fondamentaux de notre démocratie. Tous les sites Internet et les applications mobiles des organismes publics sont soumis à une exigence de non-discrimination des usagers, en particulier sur la question du handicap.
+                    {t("index.dossier2.desc")}
                   </p>
                 </div>
               </div>
@@ -326,9 +322,9 @@ const Index = () => {
           <div className="bg-muted/50 p-8 rounded-sm animate-fade-in" style={{ animationDelay: "0.8s" }}>
             <h3 className="text-2xl font-light text-primary mb-4">{t("index.conseilGouvernement")}</h3>
             <p className="text-foreground mb-4">
-              Le Conseil de gouvernement se réunit hebdomadairement au ministère d'État afin de délibérer de toutes les affaires inscrites à l'ordre du jour qui est arrêté par le Premier ministre, président du Conseil de gouvernement.
+              {t("index.conseil.desc")}
             </p>
-            <p className="text-foreground mb-6">Les communiqués du Conseil de gouvernement sont en français.</p>
+            <p className="text-foreground mb-6">{t("index.conseil.note")}</p>
             <div className="text-center">
               <span
                 className="inline-block px-8 py-3 border border-border rounded-sm text-sm font-medium uppercase tracking-wide cursor-default"
