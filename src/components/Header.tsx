@@ -11,13 +11,13 @@ import {
 } from "./ui/dropdown-menu";
 import govLogo from "@/assets/gov-logo.png";
 
-// Dropdown data for each menu
-const dropdownData: Record<string, { label: string; href: string | null }[]> = {
+// Dropdown data for each menu - uses translation keys
+const getDropdownData = (t: (key: string) => string): Record<string, { label: string; href: string | null }[]> => ({
   actualites: [
-    { label: "Toutes les actualités", href: null },
-    { label: "Conseils de gouvernement", href: null },
-    { label: "Agenda", href: null },
-    { label: "Conférences de presse en vidéo", href: null },
+    { label: t("dropdown.toutesActualites"), href: null },
+    { label: t("dropdown.conseilsGouvernement"), href: null },
+    { label: t("dropdown.agenda"), href: null },
+    { label: t("dropdown.conferencesVideo"), href: null },
   ],
   gouvernement: [
     { label: "Luc FRIEDEN", href: "/gouvernement" },
@@ -35,34 +35,35 @@ const dropdownData: Record<string, { label: string; href: string | null }[]> = {
     { label: "Serge WILMES", href: "/gouvernement" },
     { label: "Elisabeth MARGUE", href: "/gouvernement" },
     { label: "Eric THILL", href: "/gouvernement" },
-    { label: "Anciens membres du gouvernement", href: "/gouvernement" },
+    { label: t("dropdown.anciensMembres"), href: "/gouvernement" },
   ],
   systemePolitique: [
-    { label: "Chef de l'État", href: "/systeme-politique" },
-    { label: "Gouvernement", href: "/gouvernement" },
-    { label: "Système électoral", href: "/systeme-politique" },
-    { label: "Chambre des députés", href: "/systeme-politique" },
-    { label: "Conseil d'État", href: "/systeme-politique" },
-    { label: "Cour des comptes", href: "/systeme-politique" },
-    { label: "Conseil économique et social", href: "/systeme-politique" },
-    { label: "Chambres professionnelles", href: "/systeme-politique" },
-    { label: "Cours et tribunaux", href: "/systeme-politique" },
-    { label: "Partis politiques", href: "/systeme-politique" },
-    { label: "Union européenne et organisations internationales", href: "/systeme-politique" },
-    { label: "Conseil supérieur pour un développement durable", href: "/systeme-politique" },
+    { label: t("dropdown.chefEtat"), href: "/systeme-politique" },
+    { label: t("dropdown.gouvernement"), href: "/gouvernement" },
+    { label: t("dropdown.systemeElectoral"), href: "/systeme-politique" },
+    { label: t("dropdown.chambreDeputes"), href: "/systeme-politique" },
+    { label: t("dropdown.conseilEtat"), href: "/systeme-politique" },
+    { label: t("dropdown.courComptes"), href: "/systeme-politique" },
+    { label: t("dropdown.conseilEcoSocial"), href: "/systeme-politique" },
+    { label: t("dropdown.chambresPro"), href: "/systeme-politique" },
+    { label: t("dropdown.coursTribunaux"), href: "/systeme-politique" },
+    { label: t("dropdown.partisPolitiques"), href: "/systeme-politique" },
+    { label: t("dropdown.unionEuropeenne"), href: "/systeme-politique" },
+    { label: t("dropdown.conseilDevDurable"), href: "/systeme-politique" },
   ],
   verification: [
-    { label: "Vérification de mon permis de conduire", href: "/verification/permis-conduire" },
-    { label: "Vérification de ma carte de séjour", href: "/verification/carte-sejour" },
-    { label: "Vérification de visa", href: "/verification/visa" },
+    { label: t("dropdown.verifPermis"), href: "/verification/permis-conduire" },
+    { label: t("dropdown.verifCarteSejour"), href: "/verification/carte-sejour" },
+    { label: t("dropdown.verifVisa"), href: "/verification/visa" },
   ],
-};
+});
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hoveredNav, setHoveredNav] = useState<string | null>(null);
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
+  const dropdownData = getDropdownData(t);
 
   const languages = [
     { code: "FR" as const, label: "Français" },
