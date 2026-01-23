@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
-type Language = "FR" | "EN" | "DE" | "LU";
+type Language = "FR" | "EN" | "LU";
 
 interface LanguageContextType {
   language: Language;
@@ -279,141 +279,6 @@ const translations: Record<Language, Record<string, string>> = {
     // Common
     "common.lastModified": "Last modified on",
   },
-  DE: {
-    // Navigation
-    "nav.home": "Startseite",
-    "nav.verify": "Visum überprüfen",
-    "nav.info": "Informationen",
-    "nav.services": "Bürgerdienste",
-    "nav.contact": "Kontakt",
-    "nav.admin": "Verwaltung",
-    "nav.actualites": "Nachrichten",
-    "nav.gouvernement": "Die Regierung",
-    "nav.ministeres": "Ministerien",
-    "nav.administrations": "Verwaltungen",
-    "nav.dossiers": "Themen",
-    "nav.verificationDocuments": "Dokumentenprüfung",
-    "nav.systemePolitique": "Politisches System",
-    
-    // Header
-    "header.government": "Die Regierung",
-    "header.subtitle": "von Luxemburg",
-    "header.ministry": "Visum-Überprüfungsdienst",
-    "header.topLeft": "gouvernement.lu",
-    "header.topLeftSub": "Ministerien",
-    "header.topRight": "DIE REGIERUNG",
-    "header.topRightSub": "DES GROSSHERZOGTUMS LUXEMBURG",
-    
-    // Hero/Features
-    "hero.title": "Visum-Überprüfung",
-    "hero.description": "Überprüfen Sie die Echtheit und Gültigkeit eines von Luxemburg ausgestellten Visums",
-    "features.title": "So funktioniert es",
-    "features.step1.title": "Informationen eingeben",
-    "features.step1.desc": "Geben Sie die Visum-Referenznummer und Passnummer ein",
-    "features.step2.title": "Sofortige Überprüfung",
-    "features.step2.desc": "Unser System überprüft die Informationen in Echtzeit",
-    "features.step3.title": "Sicheres Ergebnis",
-    "features.step3.desc": "Erhalten Sie eine offizielle Bestätigung des Visumstatus",
-    
-    // Info
-    "info.title": "Wichtige Informationen",
-    "info.required": "Erforderliche Elemente",
-    "info.requiredDesc": "Um ein Visum zu überprüfen, benötigen Sie die Visum-Referenznummer (Format: LU-XXXX-XXXX) und die Passnummer des Inhabers.",
-    "info.official": "Offizieller Dienst",
-    "info.officialDesc": "Dieser Dienst wird von der Regierung des Großherzogtums Luxemburg bereitgestellt. Bei Fragen wenden Sie sich bitte an die zuständigen Behörden.",
-    
-    // Footer
-    "footer.rights": "Alle Rechte vorbehalten",
-    "footer.legal": "Impressum",
-    "footer.privacy": "Datenschutz",
-    "footer.accessibility": "Barrierefreiheit",
-    "footer.rubriques": "Rubriken",
-    "footer.support": "Support",
-    "footer.stayConnected": "Bleiben Sie verbunden",
-    "footer.contact": "Kontakt",
-    "footer.sitemap": "Sitemap",
-    "footer.about": "Über diese Seite",
-    "footer.legalAspects": "Rechtliche Aspekte",
-    "footer.accessibilityStatement": "Barrierefreiheitserklärung",
-    "footer.cookies": "Cookie-Verwaltung",
-    "footer.newsletter": "Newsletter abonnieren",
-    "footer.publications": "Publikationen",
-    "footer.conferences": "Pressekonferenzen auf Video",
-    "footer.agenda": "Agenda",
-    
-    // Index page
-    "index.alaune": "Schlagzeilen",
-    "index.actualitesUne": "Top-Nachrichten",
-    "index.toutesActualites": "Alle Nachrichten",
-    "index.agenda": "Regierungsagenda",
-    "index.toutAgenda": "Vollständige Agenda",
-    "index.interviews": "Interviews",
-    "index.toutesInterviews": "Alle Interviews",
-    "index.dossiers": "Themen",
-    "index.tousDossiers": "Alle Themen",
-    "index.conseilGouvernement": "Regierungsrat",
-    "index.gouvernementFacebook": "Regierung auf Facebook",
-    "index.etatNation": "Lage der Nation 2025",
-    "index.publications": "Publikationen",
-    "index.toutesPublications": "Alle Publikationen",
-    "index.portails": "Portale",
-    "index.membres": "Regierungsmitglieder",
-    "index.tousCommuniques": "Alle Mitteilungen des Regierungsrates",
-    
-    // Index page content
-    "index.newsMain.title": "Vorstellung eines Maßnahmenpakets \"Mateneen. Fir all Famill. Fir all Kand.\": einheitliche Steuerklasse, Betreuungsgutschein, Familienbeihilfe",
-    "index.newsMain.date": "06.01.2026",
-    "index.newsMain.desc": "Der Livestream beginnt gegen 10:30 Uhr.",
-    "index.newsSide1.title": "Neuerungen 2026",
-    "index.newsSide1.date": "29.12.2025",
-    "index.newsSide1.desc": "Neue gesetzliche und regulatorische Bestimmungen, die die Bürger direkt betreffen, treten 2026 in Kraft. Hier ist ein Überblick über die wichtigsten Änderungen.",
-    "index.newsSide2.title": "Erklärung der luxemburgischen Regierung zur Lage in Venezuela",
-    "index.newsSide2.date": "04.01.2026",
-    "index.newsSide2.desc": "Die Regierung verfolgt die Ereignisse in Venezuela aufmerksam, nach der US-Militäroperation, bei der Nicolas Maduro und seine Frau gefangen genommen wurden.",
-    "index.etatNation.desc": "Finden Sie hier die allgemeine politische Erklärung zur Lage der Nation 2025 von Luc Frieden sowie die entsprechenden Illustrationen.",
-    "index.facebook.posted": "vor 6 Tagen",
-    "index.conseil.desc": "Der Regierungsrat tagt wöchentlich im Staatsministerium, um alle Angelegenheiten auf der vom Premierminister festgelegten Tagesordnung zu beraten.",
-    "index.conseil.note": "Die Pressemitteilungen des Regierungsrates sind auf Französisch.",
-    "index.dossier1.title": "Die Regierungsbildung 2023",
-    "index.dossier2.title": "Das Engagement der Regierung für digitale Barrierefreiheit",
-    "index.dossier2.desc": "Gleichheit ist eines der Grundprinzipien unserer Demokratie. Alle Websites und mobilen Anwendungen öffentlicher Stellen unterliegen einer Nichtdiskriminierungsanforderung.",
-    "index.pub1.title": "über... die Geschichte Luxemburgs",
-    "index.pub1.desc": "Diese Broschüre präsentiert kurz die Entwicklung Luxemburgs vom 10. Jahrhundert bis heute.",
-    "index.pub1.lang": "Französisch, Englisch, Deutsch",
-    "index.pub2.title": "Über... Sprachen in Luxemburg",
-    "index.pub2.desc": "Der Sprachgebrauch im Großherzogtum Luxemburg - 2025",
-    "index.pub2.lang": "Französisch, Englisch, Deutsch, Luxemburgisch",
-    "index.langLabel": "SPRACHE(N):",
-    "index.portail1.title": "Portal für öffentliche Aufträge",
-    "index.portail1.desc": "Finden Sie alle öffentlichen Aufträge auf dem luxemburgischen Portal für öffentliche Aufträge:",
-    "index.portail2.title": "GovJobs Portal",
-    "index.portail2.desc": "Der luxemburgische Staat stellt ein! Entdecken Sie freie Stellen:",
-    "index.portail3.title": "Guichet.lu Portal",
-    "index.portail3.desc": "Finden Sie alle Informationen und Dienstleistungen luxemburgischer öffentlicher Stellen auf Guichet.lu:",
-    
-    // Breadcrumb
-    "breadcrumb.systemePolitique": "Politisches System",
-    
-    // Gouvernement page
-    "gouv.title": "Die Regierung",
-    "gouv.lastModified": "Letzte Änderung am",
-    "gouv.premierMinistre": "Premierminister",
-    "gouv.formerMembers": "Ehemalige Regierungsmitglieder",
-    
-    // Ministeres page
-    "ministeres.title": "Ministerien",
-    "ministeres.filter": "Nach Ministerium filtern",
-    "ministeres.placeholder": "Zum Beispiel: Justizministerium",
-    "ministeres.count": "Anzahl der angezeigten Ministerien",
-    "ministeres.of": "von",
-    
-    // Administrations page
-    "admin.title": "Verwaltungen",
-    "admin.externalSite": "externe Seite",
-    
-    // Common
-    "common.lastModified": "Letzte Änderung am",
-  },
   LU: {
     // Navigation
     "nav.home": "Heem",
@@ -556,7 +421,11 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem("selectedLanguage");
-    return (saved as Language) || "FR";
+    // If user had DE selected before, fallback to FR
+    if (saved === "DE" || !["FR", "EN", "LU"].includes(saved || "")) {
+      return "FR";
+    }
+    return saved as Language;
   });
 
   const setLanguage = (lang: Language) => {
