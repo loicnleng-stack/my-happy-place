@@ -67,7 +67,6 @@ export function Header() {
   const languages = [
     { code: "FR" as const, label: "Français" },
     { code: "EN" as const, label: "English" },
-    { code: "DE" as const, label: "Deutsch" },
     { code: "LU" as const, label: "Lëtzebuergesch" },
   ];
 
