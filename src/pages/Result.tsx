@@ -37,21 +37,29 @@ const Result = () => {
       }
 
       try {
-        const { data, error: fetchError } = await supabase
-          .from("visas")
-          .select("*")
-          .eq("passport_number", passport)
-          .eq("reference_number", reference)
-          .maybeSingle();
+        // Call the secure edge function instead of direct database query
+        const { data, error: fetchError } = await supabase.functions.invoke('verify-visa', {
+          body: {
+            passport_number: passport.trim().toUpperCase(),
+            reference_number: reference.trim().toUpperCase()
+          }
+        });
 
         if (fetchError) {
-          throw fetchError;
+          console.error("Edge function error:", fetchError);
+          throw new Error("Une erreur est survenue lors de la recherche");
         }
 
-        if (!data) {
-          setError("Aucun visa trouvé avec ces informations. Veuillez vérifier vos données.");
+        if (data?.error) {
+          if (data.error.includes("No visa found")) {
+            setError("Aucun visa trouvé avec ces informations. Veuillez vérifier vos données.");
+          } else {
+            setError(data.error);
+          }
+        } else if (data?.visa) {
+          setVisa(data.visa as Visa);
         } else {
-          setVisa(data as Visa);
+          setError("Aucun visa trouvé avec ces informations. Veuillez vérifier vos données.");
         }
       } catch (err) {
         console.error("Error fetching visa:", err);

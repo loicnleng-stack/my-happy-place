@@ -1,1 +1,4 @@
 project_id = "mgmypjmdyfjybszehnfd"
+
+[functions.verify-visa]
+verify_jwt = false
