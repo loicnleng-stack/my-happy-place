@@ -1,0 +1,117 @@
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+};
+
+interface VerifyVisaRequest {
+  passport_number: string;
+  reference_number: string;
+}
+
+Deno.serve(async (req) => {
+  // Handle CORS preflight requests
+  if (req.method === 'OPTIONS') {
+    return new Response(null, { headers: corsHeaders });
+  }
+
+  try {
+    const { passport_number, reference_number } = await req.json() as VerifyVisaRequest;
+
+    // Input validation
+    if (!passport_number || typeof passport_number !== 'string') {
+      console.log('Missing or invalid passport_number');
+      return new Response(
+        JSON.stringify({ error: 'Passport number is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!reference_number || typeof reference_number !== 'string') {
+      console.log('Missing or invalid reference_number');
+      return new Response(
+        JSON.stringify({ error: 'Reference number is required' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Sanitize inputs - only allow alphanumeric characters and common separators
+    const sanitizedPassport = passport_number.trim().toUpperCase();
+    const sanitizedReference = reference_number.trim().toUpperCase();
+
+    // Basic format validation
+    if (sanitizedPassport.length < 5 || sanitizedPassport.length > 20) {
+      console.log('Invalid passport number length');
+      return new Response(
+        JSON.stringify({ error: 'Invalid passport number format' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (sanitizedReference.length < 5 || sanitizedReference.length > 30) {
+      console.log('Invalid reference number length');
+      return new Response(
+        JSON.stringify({ error: 'Invalid reference number format' }),
+        { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    // Create Supabase client with service role key to bypass RLS
+    const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
+    const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
+    
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    console.log(`Verifying visa for passport: ${sanitizedPassport}, reference: ${sanitizedReference}`);
+
+    // Query the visa with both passport and reference number
+    const { data: visa, error } = await supabase
+      .from('visas')
+      .select('id, full_name, status, issue_date, expiry_date, passport_number, reference_number')
+      .eq('passport_number', sanitizedPassport)
+      .eq('reference_number', sanitizedReference)
+      .maybeSingle();
+
+    if (error) {
+      console.error('Database query error:', error);
+      return new Response(
+        JSON.stringify({ error: 'An error occurred while verifying the visa' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!visa) {
+      console.log('No visa found for the provided credentials');
+      return new Response(
+        JSON.stringify({ error: 'No visa found with the provided credentials' }),
+        { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    console.log('Visa found successfully');
+
+    // Return only necessary information (excluding document_url for security)
+    return new Response(
+      JSON.stringify({
+        visa: {
+          id: visa.id,
+          full_name: visa.full_name,
+          status: visa.status,
+          issue_date: visa.issue_date,
+          expiry_date: visa.expiry_date,
+          passport_number: visa.passport_number,
+          reference_number: visa.reference_number
+        }
+      }),
+      { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+
+  } catch (error) {
+    console.error('Unexpected error:', error);
+    return new Response(
+      JSON.stringify({ error: 'An unexpected error occurred' }),
+      { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+    );
+  }
+});
