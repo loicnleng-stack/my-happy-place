@@ -87,24 +87,24 @@ const Index = () => {
         {/* À la Une Section */}
         <section className="container py-8">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-3xl font-light text-foreground">{t("index.alaune")}</h2>
-            <button className="p-2 hover:bg-muted rounded-full transition-colors">
+            <h2 className="text-3xl font-light text-foreground animate-slide-down">{t("index.alaune")}</h2>
+            <button className="p-2 hover:bg-muted rounded-full transition-colors btn-press hover-scale">
               <Share2 className="w-5 h-5 text-muted-foreground" />
             </button>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main News */}
-            <div className="lg:col-span-2 animate-fade-in">
-              <div className="group block cursor-default">
-                <div className="aspect-video overflow-hidden rounded-sm">
+            <div className="lg:col-span-2 animate-fade-in-left">
+              <div className="group block cursor-default card-animated">
+                <div className="aspect-video overflow-hidden rounded-sm img-zoom">
                   <img 
                     src={conferencePresse} 
                     alt="Conférence de presse" 
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <h3 className="text-xl font-semibold text-primary mt-4">
+                <h3 className="text-xl font-semibold text-primary mt-4 link-underline inline-block">
                   {t("index.newsMain.title")}
                 </h3>
                 <p className="text-sm text-primary mt-2">{t("index.newsMain.date")}</p>
@@ -113,9 +113,9 @@ const Index = () => {
             </div>
 
             {/* Side News */}
-            <div className="space-y-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              <div className="block cursor-default">
-                <h3 className="text-lg font-semibold text-primary">
+            <div className="space-y-6 animate-fade-in-right delay-200 stagger-children">
+              <div className="block cursor-default hover-lift p-4 rounded-sm transition-all">
+                <h3 className="text-lg font-semibold text-primary link-underline inline-block">
                   {t("index.newsSide1.title")}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">{t("index.newsSide1.date")}</p>
@@ -124,8 +124,8 @@ const Index = () => {
                 </p>
               </div>
 
-              <div className="block cursor-default">
-                <h3 className="text-lg font-semibold text-primary">
+              <div className="block cursor-default hover-lift p-4 rounded-sm transition-all">
+                <h3 className="text-lg font-semibold text-primary link-underline inline-block">
                   {t("index.newsSide2.title")}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-1">{t("index.newsSide2.date")}</p>
@@ -340,27 +340,28 @@ const Index = () => {
           <h2 className="text-3xl font-light text-foreground mb-8 animate-fade-in" style={{ animationDelay: "0.9s" }}>
             {t("index.membres")}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 stagger-children">
             {governmentMembers.map((member, index) => (
               <Link
                 key={index}
                 to="/gouvernement"
-                className="group relative aspect-[3/4] overflow-hidden"
+                className="group relative aspect-[3/4] overflow-hidden animate-fade-in-scale"
+                style={{ animationDelay: `${index * 0.05}s` }}
                 onMouseEnter={() => setHoveredMember(index)}
                 onMouseLeave={() => setHoveredMember(null)}
               >
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-full object-cover object-top transition-all duration-500 group-hover:scale-110 group-hover:brightness-110"
                 />
                 {/* Hover overlay */}
                 <div
-                  className={`absolute inset-0 bg-primary/90 flex flex-col justify-start p-4 transition-opacity duration-300 ${
-                    hoveredMember === index ? "opacity-100" : "opacity-0"
+                  className={`absolute inset-0 bg-primary/90 flex flex-col justify-start p-4 transition-all duration-300 ${
+                    hoveredMember === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                   }`}
                 >
-                  <h4 className="text-primary-foreground font-bold text-sm uppercase">
+                  <h4 className="text-primary-foreground font-bold text-sm uppercase animate-slide-down" style={{ animationDelay: "0.1s" }}>
                     {member.name}
                   </h4>
                   <p className="text-primary-foreground/90 text-xs mt-2 leading-relaxed">
