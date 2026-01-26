@@ -2,8 +2,9 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Share2, Facebook, ExternalLink, FileText, ChevronRight } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ScrollAnimation } from "@/hooks/useScrollAnimation";
 
 // Import minister images
 import lucFrieden from "@/assets/ministers/luc-frieden.png";
@@ -167,7 +168,7 @@ const Index = () => {
         <section className="container py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* État de la Nation */}
-            <div className="lg:col-span-2 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+            <ScrollAnimation animation="fade-in-left" className="lg:col-span-2">
               <div className="bg-gray-100 p-8 rounded-sm">
                 <h3 className="text-2xl font-light text-primary mb-4">{t("index.etatNation")}</h3>
                 <p className="text-foreground mb-6">
@@ -182,10 +183,10 @@ const Index = () => {
                   />
                 </div>
               </div>
-            </div>
+            </ScrollAnimation>
 
             {/* Facebook */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.3s" }}>
+            <ScrollAnimation animation="fade-in-right" delay={0.2}>
               <h3 className="text-2xl font-light text-foreground mb-6">Facebook</h3>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded overflow-hidden">
@@ -207,7 +208,7 @@ const Index = () => {
                   {t("index.gouvernementFacebook")}
                 </span>
               </div>
-            </div>
+            </ScrollAnimation>
           </div>
         </section>
 
@@ -215,7 +216,7 @@ const Index = () => {
         <section className="container py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Agenda */}
-            <div className="lg:col-span-2 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+            <ScrollAnimation animation="slide-up" className="lg:col-span-2">
               <div className="bg-muted/50 p-8 rounded-sm">
                 <h3 className="text-2xl font-light text-primary mb-6">{t("index.agenda")}</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -234,10 +235,10 @@ const Index = () => {
                   </span>
                 </div>
               </div>
-            </div>
+            </ScrollAnimation>
 
             {/* Interviews */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.5s" }}>
+            <ScrollAnimation animation="fade-in-right" delay={0.2}>
               <h3 className="text-2xl font-light text-foreground mb-6">{t("index.interviews")}</h3>
               <div className="space-y-6">
                 {interviews.map((interview, index) => (
@@ -256,20 +257,17 @@ const Index = () => {
                   {t("index.toutesInterviews")}
                 </span>
               </div>
-            </div>
+            </ScrollAnimation>
           </div>
         </section>
 
         {/* Dossiers Section */}
-        <section className="container py-8">
+        <ScrollAnimation animation="slide-up" className="container py-8">
           <h2 className="text-3xl font-light text-foreground mb-8">{t("index.dossiers")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* First dossier - Photo style */}
-            <div
-              className="block animate-fade-in cursor-default"
-              style={{ animationDelay: "0.6s" }}
-            >
-              <div className="aspect-video overflow-hidden rounded-sm">
+            <div className="block cursor-default hover-lift">
+              <div className="aspect-video overflow-hidden rounded-sm img-zoom">
                 <img
                   src={dossierGouvernement}
                   alt="La formation du gouvernement 2023"
@@ -282,13 +280,10 @@ const Index = () => {
             </div>
 
             {/* Second dossier - Card with description */}
-            <div
-              className="block animate-fade-in cursor-default"
-              style={{ animationDelay: "0.7s" }}
-            >
+            <div className="block cursor-default hover-lift">
               <div className="relative">
                 {/* Blue tech background with actual image */}
-                <div className="aspect-video overflow-hidden">
+                <div className="aspect-video overflow-hidden img-zoom">
                   <img 
                     src={dossierAccessibilite} 
                     alt="Accessibilité numérique" 
@@ -315,11 +310,11 @@ const Index = () => {
               {t("index.tousDossiers")}
             </span>
           </div>
-        </section>
+        </ScrollAnimation>
 
         {/* Conseil de gouvernement Section */}
-        <section className="container py-8">
-          <div className="bg-muted/50 p-8 rounded-sm animate-fade-in" style={{ animationDelay: "0.8s" }}>
+        <ScrollAnimation animation="fade-in-scale" className="container py-8">
+          <div className="bg-muted/50 p-8 rounded-sm">
             <h3 className="text-2xl font-light text-primary mb-4">{t("index.conseilGouvernement")}</h3>
             <p className="text-foreground mb-4">
               {t("index.conseil.desc")}
@@ -333,20 +328,19 @@ const Index = () => {
               </span>
             </div>
           </div>
-        </section>
+        </ScrollAnimation>
 
         {/* Présentation du gouvernement Section */}
-        <section className="container py-8">
-          <h2 className="text-3xl font-light text-foreground mb-8 animate-fade-in" style={{ animationDelay: "0.9s" }}>
+        <ScrollAnimation animation="slide-up" className="container py-8">
+          <h2 className="text-3xl font-light text-foreground mb-8">
             {t("index.membres")}
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1 stagger-children">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-1">
             {governmentMembers.map((member, index) => (
               <Link
                 key={index}
                 to="/gouvernement"
-                className="group relative aspect-[3/4] overflow-hidden animate-fade-in-scale"
-                style={{ animationDelay: `${index * 0.05}s` }}
+                className="group relative aspect-[3/4] overflow-hidden"
                 onMouseEnter={() => setHoveredMember(index)}
                 onMouseLeave={() => setHoveredMember(null)}
               >
@@ -361,7 +355,7 @@ const Index = () => {
                     hoveredMember === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                   }`}
                 >
-                  <h4 className="text-primary-foreground font-bold text-sm uppercase animate-slide-down" style={{ animationDelay: "0.1s" }}>
+                  <h4 className="text-primary-foreground font-bold text-sm uppercase">
                     {member.name}
                   </h4>
                   <p className="text-primary-foreground/90 text-xs mt-2 leading-relaxed">
@@ -371,14 +365,14 @@ const Index = () => {
               </Link>
             ))}
           </div>
-        </section>
+        </ScrollAnimation>
 
         {/* Publications Section */}
-        <section className="container py-8">
+        <ScrollAnimation animation="fade-in" className="container py-8">
           <h2 className="text-3xl font-light text-foreground mb-8">{t("index.publications")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Publication 1 - Histoire du Luxembourg */}
-            <div className="bg-white border border-border p-6 flex gap-6 animate-fade-in" style={{ animationDelay: "1s" }}>
+            <div className="bg-card border border-border p-6 flex gap-6 hover-lift">
               <div className="w-40 flex-shrink-0">
                 <img 
                   src={publicationHistoire} 
@@ -399,7 +393,7 @@ const Index = () => {
             </div>
 
             {/* Publication 2 - Langues au Luxembourg */}
-            <div className="bg-white border border-border p-6 flex gap-6 animate-fade-in" style={{ animationDelay: "1.1s" }}>
+            <div className="bg-card border border-border p-6 flex gap-6 hover-lift">
               <div className="w-40 flex-shrink-0">
                 <img 
                   src={publicationLangues} 
@@ -427,57 +421,39 @@ const Index = () => {
               {t("index.toutesPublications")}
             </span>
           </div>
-        </section>
+        </ScrollAnimation>
 
         {/* Portails Section */}
-        <section className="container py-12">
+        <ScrollAnimation animation="slide-up" className="container py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Portail des marchés publics */}
-            <a
-              href="https://marches.public.lu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-gray-100 p-6 hover:shadow-lg transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: "1.2s" }}
-            >
-              <h3 className="text-xl font-semibold text-primary group-hover:underline">Portail des marchés publics</h3>
+            <div className="bg-muted p-6 transition-all duration-300 hover-lift">
+              <h3 className="text-xl font-semibold text-primary">Portail des marchés publics</h3>
               <p className="text-sm text-foreground mt-2">Trouvez tous les marchés publics sur le portail luxembourgeois des marchés publics:</p>
               <div className="mt-4 overflow-hidden border border-border">
                 <img src={portailMarches} alt="Portail des marchés publics" className="w-full h-auto" />
               </div>
-            </a>
+            </div>
 
             {/* Portail GovJobs */}
-            <a
-              href="https://govjobs.public.lu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-gray-100 p-6 hover:shadow-lg transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: "1.3s" }}
-            >
-              <h3 className="text-xl font-semibold text-primary group-hover:underline">Portail GovJobs</h3>
+            <div className="bg-muted p-6 transition-all duration-300 hover-lift">
+              <h3 className="text-xl font-semibold text-primary">Portail GovJobs</h3>
               <p className="text-sm text-foreground mt-2">L&apos;État luxembourgeois recrute! Découvrez les postes vacants pour fonctionnaires, employés et salariés de l&apos;État:</p>
               <div className="mt-4 overflow-hidden border border-border">
                 <img src={portailGovjobs} alt="Portail GovJobs" className="w-full h-auto" />
               </div>
-            </a>
+            </div>
 
             {/* Portail Guichet.lu */}
-            <a
-              href="https://guichet.lu"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group bg-gray-100 p-6 hover:shadow-lg transition-all duration-300 animate-fade-in"
-              style={{ animationDelay: "1.4s" }}
-            >
-              <h3 className="text-xl font-semibold text-primary group-hover:underline">Portail Guichet.lu</h3>
+            <div className="bg-muted p-6 transition-all duration-300 hover-lift">
+              <h3 className="text-xl font-semibold text-primary">Portail Guichet.lu</h3>
               <p className="text-sm text-foreground mt-2">Trouvez l&apos;ensemble des informations, démarches et services proposés par les organismes publics luxembourgeois sur Guichet.lu:</p>
               <div className="mt-4 overflow-hidden border border-border">
                 <img src={portailGuichet} alt="Portail Guichet.lu" className="w-full h-auto" />
               </div>
-            </a>
+            </div>
           </div>
-        </section>
+        </ScrollAnimation>
       </main>
 
       <Footer />
