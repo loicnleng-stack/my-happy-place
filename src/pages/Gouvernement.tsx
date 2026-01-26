@@ -140,21 +140,21 @@ const Gouvernement = () => {
       <main className="flex-1">
         <article className="container py-8 md:py-12">
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-light text-[hsl(200,60%,35%)] mb-6">
+          <h1 className="text-4xl md:text-5xl font-light text-[hsl(200,60%,35%)] mb-6 animate-slide-down">
             {t("gouv.title")}
           </h1>
 
           {/* Horizontal line */}
-          <hr className="border-gray-200 mb-6" />
+          <hr className="border-gray-200 mb-6 animate-fade-in delay-100" />
 
           {/* Last modified date */}
-          <div className="text-right text-sm text-gray-500 mb-8">
+          <div className="text-right text-sm text-gray-500 mb-8 animate-fade-in delay-200">
             {t("common.lastModified")} 17.12.2025
           </div>
 
           {/* Premier ministre - Featured with gray background */}
           <div 
-            className="mb-12 p-6 bg-gray-100 transition-colors duration-200"
+            className="mb-12 p-6 bg-gray-100 transition-all duration-300 hover-lift animate-fade-in-scale delay-300"
             onMouseEnter={() => setHoveredIndex(0)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
@@ -162,15 +162,15 @@ const Gouvernement = () => {
               to="#" 
               className="group block"
             >
-              <h2 className="text-2xl font-light text-[hsl(200,60%,35%)] group-hover:underline mb-4">
+              <h2 className="text-2xl font-light text-[hsl(200,60%,35%)] group-hover:underline mb-4 link-underline">
                 {governmentMembers[0].name}
               </h2>
               <div className="flex flex-col md:flex-row gap-6">
-                <div className="w-full max-w-[280px] overflow-hidden">
+                <div className="w-full max-w-[280px] overflow-hidden img-zoom">
                   <img 
                     src={governmentMembers[0].photo} 
                     alt={governmentMembers[0].name}
-                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
                 <div className="flex items-center">
@@ -188,20 +188,21 @@ const Gouvernement = () => {
               <Link 
                 key={index}
                 to="#"
-                className={`group block p-4 transition-colors duration-200 ${
+                className={`group block p-4 transition-all duration-300 card-animated animate-fade-in-scale rounded-sm ${
                   hoveredIndex === index + 1 ? "bg-[hsl(200,40%,95%)]" : "hover:bg-[hsl(200,40%,95%)]"
                 }`}
+                style={{ animationDelay: `${(index + 4) * 0.1}s` }}
                 onMouseEnter={() => setHoveredIndex(index + 1)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <h3 className="text-xl font-light text-[hsl(200,60%,35%)] group-hover:underline mb-4 text-center">
                   {member.name}
                 </h3>
-                <div className="w-full mb-4 overflow-hidden">
+                <div className="w-full mb-4 overflow-hidden img-zoom rounded-sm">
                   <img 
                     src={member.photo} 
                     alt={member.name}
-                    className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.01]"
+                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                 </div>
                 <p className="text-gray-800 text-sm">
