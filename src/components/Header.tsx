@@ -94,23 +94,33 @@ export function Header() {
       </div>
 
       {/* Middle bar - dark blue gradient with site name */}
-      <div className="bg-[hsl(210,50%,25%)] py-4">
+      <div className="bg-[hsl(210,50%,25%)] py-3 md:py-4">
         <div className="container flex items-center justify-between">
-          <div className="flex items-center">
-            <div className="flex items-center">
+          {/* Mobile: Hamburger menu on left */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden text-white hover:bg-white/10 mr-2"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </Button>
+
+          <div className="flex items-center flex-1 min-w-0">
+            <div className="hidden sm:flex items-center">
               <div className="pr-4">
-              <p className="text-[13px] text-white/80 leading-tight">{t("header.government")}</p>
+                <p className="text-[13px] text-white/80 leading-tight">{t("header.government")}</p>
                 <p className="text-[13px] text-white/80 leading-tight">{t("header.subtitle")}</p>
               </div>
               <div className="w-[2px] h-10 bg-[hsl(0,75%,45%)] mr-4"></div>
             </div>
             
-            <h1 className="text-[28px] md:text-[32px] font-light text-white tracking-tight">
+            <h1 className="text-[20px] sm:text-[28px] md:text-[32px] font-light text-white tracking-tight truncate">
               gouvernement.lu
             </h1>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <button className="flex items-center gap-1 text-sm font-medium text-white/90 hover:text-white transition-colors">
@@ -135,15 +145,6 @@ export function Header() {
             <button className="p-1 text-white/80 hover:text-white transition-colors">
               <Search className="w-5 h-5" />
             </button>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden text-white hover:bg-white/10"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
           </div>
         </div>
       </div>
