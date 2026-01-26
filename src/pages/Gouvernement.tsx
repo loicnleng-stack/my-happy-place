@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ScrollAnimation } from "@/hooks/useScrollAnimation";
 
 // Import minister photos
 import lucFrieden from "@/assets/ministers/luc-frieden.png";
@@ -134,98 +134,94 @@ const Gouvernement = () => {
   const { t } = useLanguage();
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
       <main className="flex-1">
         <article className="container py-8 md:py-12">
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-light text-[hsl(200,60%,35%)] mb-6 animate-slide-down">
+          <h1 className="text-4xl md:text-5xl font-light text-primary mb-6 animate-slide-down">
             {t("gouv.title")}
           </h1>
 
           {/* Horizontal line */}
-          <hr className="border-gray-200 mb-6 animate-fade-in delay-100" />
+          <hr className="border-border mb-6 animate-fade-in delay-100" />
 
           {/* Last modified date */}
-          <div className="text-right text-sm text-gray-500 mb-8 animate-fade-in delay-200">
+          <div className="text-right text-sm text-muted-foreground mb-8 animate-fade-in delay-200">
             {t("common.lastModified")} 17.12.2025
           </div>
 
           {/* Premier ministre - Featured with gray background */}
-          <div 
-            className="mb-12 p-6 bg-gray-100 transition-all duration-300 hover-lift animate-fade-in-scale delay-300"
-            onMouseEnter={() => setHoveredIndex(0)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <Link 
-              to="#" 
-              className="group block"
+          <ScrollAnimation animation="fade-in-scale">
+            <div 
+              className="mb-12 p-6 bg-muted transition-all duration-300 hover-lift"
+              onMouseEnter={() => setHoveredIndex(0)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <h2 className="text-2xl font-light text-[hsl(200,60%,35%)] group-hover:underline mb-4 link-underline">
-                {governmentMembers[0].name}
-              </h2>
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="w-full max-w-[280px] overflow-hidden img-zoom">
-                  <img 
-                    src={governmentMembers[0].photo} 
-                    alt={governmentMembers[0].name}
-                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="flex items-center">
-                  <p className="text-gray-800">
-                    {t("gouv.premierMinistre")}
-                  </p>
+              <div className="block">
+                <h2 className="text-2xl font-light text-primary mb-4">
+                  {governmentMembers[0].name}
+                </h2>
+                <div className="flex flex-col md:flex-row gap-6">
+                  <div className="w-full max-w-[280px] overflow-hidden img-zoom">
+                    <img 
+                      src={governmentMembers[0].photo} 
+                      alt={governmentMembers[0].name}
+                      className="w-full h-auto object-cover transition-transform duration-500"
+                    />
+                  </div>
+                  <div className="flex items-center">
+                    <p className="text-foreground">
+                      {t("gouv.premierMinistre")}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </Link>
-          </div>
+            </div>
+          </ScrollAnimation>
 
           {/* Other ministers grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {governmentMembers.slice(1).map((member, index) => (
-              <Link 
-                key={index}
-                to="#"
-                className={`group block p-4 transition-all duration-300 card-animated animate-fade-in-scale rounded-sm ${
-                  hoveredIndex === index + 1 ? "bg-[hsl(200,40%,95%)]" : "hover:bg-[hsl(200,40%,95%)]"
-                }`}
-                style={{ animationDelay: `${(index + 4) * 0.1}s` }}
-                onMouseEnter={() => setHoveredIndex(index + 1)}
-                onMouseLeave={() => setHoveredIndex(null)}
-              >
-                <h3 className="text-xl font-light text-[hsl(200,60%,35%)] group-hover:underline mb-4 text-center">
-                  {member.name}
-                </h3>
-                <div className="w-full mb-4 overflow-hidden img-zoom rounded-sm">
-                  <img 
-                    src={member.photo} 
-                    alt={member.name}
-                    className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                </div>
-                <p className="text-gray-800 text-sm">
-                  {member.position}
-                </p>
-                {member.roles.map((role, idx) => (
-                  <p key={idx} className="text-gray-700 text-sm mt-1">
-                    {role}
+          <ScrollAnimation animation="slide-up">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {governmentMembers.slice(1).map((member, index) => (
+                <div 
+                  key={index}
+                  className={`block p-4 transition-all duration-300 hover-lift rounded-sm cursor-default ${
+                    hoveredIndex === index + 1 ? "bg-accent/10" : "hover:bg-accent/10"
+                  }`}
+                  onMouseEnter={() => setHoveredIndex(index + 1)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                >
+                  <h3 className="text-xl font-light text-primary mb-4 text-center">
+                    {member.name}
+                  </h3>
+                  <div className="w-full mb-4 overflow-hidden img-zoom rounded-sm">
+                    <img 
+                      src={member.photo} 
+                      alt={member.name}
+                      className="w-full h-auto object-cover transition-transform duration-500"
+                    />
+                  </div>
+                  <p className="text-foreground text-sm">
+                    {member.position}
                   </p>
-                ))}
-              </Link>
-            ))}
-          </div>
+                  {member.roles.map((role, idx) => (
+                    <p key={idx} className="text-muted-foreground text-sm mt-1">
+                      {role}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </ScrollAnimation>
 
           {/* Link to former members */}
-          <div className="mt-16 pt-8 border-t border-gray-200">
-            <Link 
-              to="#" 
-              className="text-[hsl(200,60%,35%)] hover:underline text-lg"
-            >
+          <ScrollAnimation animation="fade-in" className="mt-16 pt-8 border-t border-border">
+            <span className="text-primary text-lg cursor-default">
               {t("gouv.formerMembers")} →
-            </Link>
-          </div>
+            </span>
+          </ScrollAnimation>
         </article>
       </main>
 
