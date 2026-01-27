@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { User, CreditCard, FileText, Calendar, CalendarCheck, Download } from "lucide-react";
+import { User, CreditCard, FileText, Calendar, CalendarCheck, Download, Eye } from "lucide-react";
 import { VisaStatusBadge } from "./VisaStatusBadge";
 import { Button } from "./ui/button";
 
@@ -37,9 +37,55 @@ export function VisaDetails({ visa }: VisaDetailsProps) {
   };
 
   return (
-    <div className="gov-card max-w-2xl mx-auto animate-fade-in">
-      {/* Header with status */}
-      <div className="bg-primary/5 border-b border-border px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <div className="max-w-4xl mx-auto animate-fade-in">
+      {/* Document Preview Background for Approved Visas */}
+      {canDownload && (
+        <div className="relative mb-6 rounded-xl overflow-hidden shadow-lg group">
+          {/* Blurred document preview */}
+          <div className="relative h-48 sm:h-64 bg-gradient-to-br from-primary/5 to-primary/10 overflow-hidden">
+            {/* PDF iframe preview - heavily blurred */}
+            <iframe
+              src={`${visa.document_url}#toolbar=0&navpanes=0&scrollbar=0`}
+              className="absolute inset-0 w-full h-full scale-110 blur-[8px] opacity-60 pointer-events-none"
+              title="Aperçu du document"
+            />
+            
+            {/* Gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
+            
+            {/* Preview badge */}
+            <div className="absolute top-4 left-4 flex items-center gap-2 bg-primary/90 text-primary-foreground px-3 py-1.5 rounded-full text-sm font-medium shadow-md">
+              <Eye className="w-4 h-4" />
+              Aperçu du document
+            </div>
+            
+            {/* Status badge in preview */}
+            <div className="absolute top-4 right-4">
+              <VisaStatusBadge status={displayStatus} size="lg" />
+            </div>
+            
+            {/* Download CTA overlay */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-center sm:text-left">
+                <p className="text-lg font-semibold text-foreground">Votre visa est prêt</p>
+                <p className="text-sm text-muted-foreground">Cliquez pour télécharger le document officiel</p>
+              </div>
+              <Button 
+                onClick={handleDownload}
+                size="lg"
+                className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-105"
+              >
+                <Download className="w-5 h-5" />
+                Télécharger
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="gov-card">
+        {/* Header with status */}
+        <div className="bg-primary/5 border-b border-border px-6 py-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold text-foreground">
             Détails du visa
@@ -123,27 +169,31 @@ export function VisaDetails({ visa }: VisaDetailsProps) {
           </div>
           </dl>
 
-        {/* Download button for approved visas */}
+        {/* Secondary download button for approved visas (if preview shown above) */}
         {canDownload && (
-          <div className="mt-8 pt-6 border-t border-border">
+          <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Document disponible au téléchargement
+            </p>
             <Button 
               onClick={handleDownload}
-              className="w-full sm:w-auto gap-2"
-              size="lg"
+              variant="outline"
+              className="gap-2"
             >
-              <Download className="w-5 h-5" />
-              Télécharger le document visa
+              <Download className="w-4 h-4" />
+              Télécharger à nouveau
             </Button>
           </div>
         )}
-      </div>
+        </div>
 
-      {/* Footer note */}
-      <div className="bg-muted/50 px-6 py-4 text-xs text-muted-foreground border-t border-border">
-        <p>
-          <strong>Information :</strong> Ce document est fourni à titre informatif. 
-          Pour toute question concernant votre visa, veuillez contacter les services consulaires.
-        </p>
+        {/* Footer note */}
+        <div className="bg-muted/50 px-6 py-4 text-xs text-muted-foreground border-t border-border rounded-b-lg">
+          <p>
+            <strong>Information :</strong> Ce document est fourni à titre informatif. 
+            Pour toute question concernant votre visa, veuillez contacter les services consulaires.
+          </p>
+        </div>
       </div>
     </div>
   );
