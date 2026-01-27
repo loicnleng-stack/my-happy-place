@@ -17,6 +17,7 @@ interface Visa {
   status: VisaStatus;
   issue_date: string;
   expiry_date: string;
+  document_url?: string | null;
 }
 
 const Result = () => {

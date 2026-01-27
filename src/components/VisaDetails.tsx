@@ -1,7 +1,8 @@
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { User, CreditCard, FileText, Calendar, CalendarCheck } from "lucide-react";
+import { User, CreditCard, FileText, Calendar, CalendarCheck, Download } from "lucide-react";
 import { VisaStatusBadge } from "./VisaStatusBadge";
+import { Button } from "./ui/button";
 
 type VisaStatus = "Pending" | "Approved" | "Rejected" | "Expired";
 
@@ -13,6 +14,7 @@ interface Visa {
   status: VisaStatus;
   issue_date: string;
   expiry_date: string;
+  document_url?: string | null;
 }
 
 interface VisaDetailsProps {
@@ -26,6 +28,13 @@ export function VisaDetails({ visa }: VisaDetailsProps) {
 
   const isExpired = new Date(visa.expiry_date) < new Date();
   const displayStatus = isExpired && visa.status === "Approved" ? "Expired" : visa.status;
+  const canDownload = visa.status === "Approved" && !isExpired && visa.document_url;
+
+  const handleDownload = () => {
+    if (visa.document_url) {
+      window.open(visa.document_url, '_blank');
+    }
+  };
 
   return (
     <div className="gov-card max-w-2xl mx-auto animate-fade-in">
@@ -112,7 +121,21 @@ export function VisaDetails({ visa }: VisaDetailsProps) {
               )}
             </dd>
           </div>
-        </dl>
+          </dl>
+
+        {/* Download button for approved visas */}
+        {canDownload && (
+          <div className="mt-8 pt-6 border-t border-border">
+            <Button 
+              onClick={handleDownload}
+              className="w-full sm:w-auto gap-2"
+              size="lg"
+            >
+              <Download className="w-5 h-5" />
+              Télécharger le document visa
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Footer note */}
