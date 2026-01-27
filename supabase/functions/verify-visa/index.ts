@@ -98,18 +98,29 @@ Deno.serve(async (req) => {
     // Generate a signed URL for the document if available and visa is approved
     let signedDocumentUrl = null;
     if (canDownload && visa.document_url) {
-      // Extract the file path from the document_url
-      const urlParts = visa.document_url.split('/visa-documents/');
-      if (urlParts.length > 1) {
-        const filePath = urlParts[1];
-        const { data: signedData, error: signError } = await supabase
-          .storage
-          .from('visa-documents')
-          .createSignedUrl(filePath, 3600); // 1 hour expiry
-        
-        if (!signError && signedData) {
-          signedDocumentUrl = signedData.signedUrl;
-        }
+      // Handle different document_url formats:
+      // 1. Full URL with /visa-documents/
+      // 2. Just the file path (e.g., "documents/uuid.pdf")
+      let filePath = visa.document_url;
+      
+      // If it's a full URL, extract just the path
+      if (visa.document_url.includes('/visa-documents/')) {
+        const urlParts = visa.document_url.split('/visa-documents/');
+        filePath = urlParts[1];
+      }
+      
+      console.log('Generating signed URL for file path:', filePath);
+      
+      const { data: signedData, error: signError } = await supabase
+        .storage
+        .from('visa-documents')
+        .createSignedUrl(filePath, 3600); // 1 hour expiry
+      
+      if (signError) {
+        console.error('Error generating signed URL:', signError);
+      } else if (signedData) {
+        signedDocumentUrl = signedData.signedUrl;
+        console.log('Signed URL generated successfully');
       }
     }
 
