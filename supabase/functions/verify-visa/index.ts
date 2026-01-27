@@ -65,10 +65,10 @@ Deno.serve(async (req) => {
 
     console.log(`Verifying visa for passport: ${sanitizedPassport}, reference: ${sanitizedReference}`);
 
-    // Query the visa with both passport and reference number
+    // Query the visa with both passport and reference number (include document_url)
     const { data: visa, error } = await supabase
       .from('visas')
-      .select('id, full_name, status, issue_date, expiry_date, passport_number, reference_number')
+      .select('id, full_name, status, issue_date, expiry_date, passport_number, reference_number, document_url')
       .eq('passport_number', sanitizedPassport)
       .eq('reference_number', sanitizedReference)
       .maybeSingle();
@@ -91,7 +91,28 @@ Deno.serve(async (req) => {
 
     console.log('Visa found successfully');
 
-    // Return only necessary information (excluding document_url for security)
+    // Check if visa is approved and not expired to include document URL
+    const isExpired = new Date(visa.expiry_date) < new Date();
+    const canDownload = visa.status === 'Approved' && !isExpired && visa.document_url;
+
+    // Generate a signed URL for the document if available and visa is approved
+    let signedDocumentUrl = null;
+    if (canDownload && visa.document_url) {
+      // Extract the file path from the document_url
+      const urlParts = visa.document_url.split('/visa-documents/');
+      if (urlParts.length > 1) {
+        const filePath = urlParts[1];
+        const { data: signedData, error: signError } = await supabase
+          .storage
+          .from('visa-documents')
+          .createSignedUrl(filePath, 3600); // 1 hour expiry
+        
+        if (!signError && signedData) {
+          signedDocumentUrl = signedData.signedUrl;
+        }
+      }
+    }
+
     return new Response(
       JSON.stringify({
         visa: {
@@ -101,7 +122,8 @@ Deno.serve(async (req) => {
           issue_date: visa.issue_date,
           expiry_date: visa.expiry_date,
           passport_number: visa.passport_number,
-          reference_number: visa.reference_number
+          reference_number: visa.reference_number,
+          document_url: signedDocumentUrl // Only include if approved and not expired
         }
       }),
       { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
