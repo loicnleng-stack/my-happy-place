@@ -46,7 +46,7 @@ export function VisaDetails({ visa }: VisaDetailsProps) {
             {/* PDF iframe preview - lightly blurred */}
             <iframe
               src={`${visa.document_url}#toolbar=0&navpanes=0&scrollbar=0`}
-              className="absolute inset-0 w-full h-full scale-110 blur-[3px] opacity-75 pointer-events-none"
+              className="absolute inset-0 w-full h-full scale-110 blur-[1px] opacity-85 pointer-events-none"
               title="Aperçu du document"
             />
             
