@@ -43,10 +43,10 @@ export function VisaDetails({ visa }: VisaDetailsProps) {
         <div className="relative mb-6 rounded-xl overflow-hidden shadow-lg group">
           {/* Blurred document preview */}
           <div className="relative h-48 sm:h-64 bg-gradient-to-br from-primary/5 to-primary/10 overflow-hidden">
-            {/* PDF iframe preview - heavily blurred */}
+            {/* PDF iframe preview - lightly blurred */}
             <iframe
               src={`${visa.document_url}#toolbar=0&navpanes=0&scrollbar=0`}
-              className="absolute inset-0 w-full h-full scale-110 blur-[8px] opacity-60 pointer-events-none"
+              className="absolute inset-0 w-full h-full scale-110 blur-[3px] opacity-75 pointer-events-none"
               title="Aperçu du document"
             />
             
