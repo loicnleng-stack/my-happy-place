@@ -28,8 +28,24 @@ export function VisaSearchForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast.error("Service temporairement indisponible. Veuillez réessayer ultérieurement.");
-    return;
+    
+    const validation = searchSchema.safeParse({ passportNumber, iuc });
+    
+    if (!validation.success) {
+      const errors = validation.error.errors;
+      toast.error(errors[0].message);
+      return;
+    }
+
+    setIsLoading(true);
+    
+    const params = new URLSearchParams({
+      passport: passportNumber.trim(),
+      reference: iuc.trim(),
+    });
+    
+    navigate(`/result?${params.toString()}`);
+    setIsLoading(false);
   };
 
   return (
