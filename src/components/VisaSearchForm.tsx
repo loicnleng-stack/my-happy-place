@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AlertCircle, ShieldAlert } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -26,35 +26,59 @@ export function VisaSearchForm() {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const result = searchSchema.safeParse({ passportNumber, iuc });
+    if (!result.success) {
+      toast.error(result.error.errors[0].message);
+      return;
+    }
+
+    setIsLoading(true);
+    navigate(`/result?passport=${encodeURIComponent(passportNumber.trim())}&reference=${encodeURIComponent(iuc.trim())}`);
+  };
+
   return (
     <div className="gov-card max-w-xl mx-auto">
-      <div className="bg-destructive/10 border-b border-destructive/20 px-6 py-4">
-        <h2 className="text-lg font-semibold text-destructive flex items-center gap-2">
-          <AlertCircle className="w-5 h-5" />
-          Service suspendu
+      <div className="bg-primary/5 border-b border-border px-6 py-4">
+        <h2 className="text-lg font-semibold text-foreground">
+          Vérification de visa
         </h2>
       </div>
 
-      <div className="p-6 space-y-4 text-center">
-        <div className="w-16 h-16 bg-destructive/10 rounded-full flex items-center justify-center mx-auto">
-          <ShieldAlert className="w-8 h-8 text-destructive" />
+      <form onSubmit={handleSubmit} className="p-6 space-y-4">
+        <div className="space-y-2">
+          <Label htmlFor="passport">Numéro de passeport</Label>
+          <Input
+            id="passport"
+            placeholder="Ex: AB1234567"
+            value={passportNumber}
+            onChange={(e) => setPassportNumber(e.target.value)}
+            disabled={isLoading}
+          />
         </div>
-        <h3 className="text-lg font-semibold text-foreground">
-          Vérification temporairement suspendue
-        </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
-          Ce service a été temporairement suspendu suite à un signalement auprès des autorités compétentes. 
-          Une investigation est en cours conformément aux réglementations en vigueur.
-        </p>
-        <p className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
-          Nous nous excusons pour la gêne occasionnée. Le service sera rétabli une fois la procédure de vérification terminée.
-        </p>
-      </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="iuc">IUC (Identificateur Unique du Client)</Label>
+          <Input
+            id="iuc"
+            placeholder="Ex: IUC-2024-00001"
+            value={iuc}
+            onChange={(e) => setIuc(e.target.value)}
+            disabled={isLoading}
+          />
+        </div>
+
+        <Button type="submit" className="w-full gap-2" disabled={isLoading}>
+          <Search className="w-4 h-4" />
+          {isLoading ? "Recherche en cours..." : "Vérifier le visa"}
+        </Button>
+      </form>
 
       <div className="bg-muted/50 px-6 py-4 text-xs text-muted-foreground border-t border-border">
         <p>
-          <strong>Réf. :</strong> Suspension préventive — Dossier en cours d'examen. 
-          Pour toute question, veuillez contacter les services consulaires.
+          Entrez votre numéro de passeport et votre IUC pour vérifier le statut de votre visa.
         </p>
       </div>
     </div>
