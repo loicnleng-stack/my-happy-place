@@ -38,24 +38,28 @@ const Result = () => {
       }
 
       try {
-        // Call the secure edge function instead of direct database query
-        const { data, error: fetchError } = await supabase.functions.invoke('verify-visa', {
-          body: {
-            passport_number: passport.trim().toUpperCase(),
-            reference_number: reference.trim().toUpperCase()
+        const response = await fetch(
+          `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/verify-visa`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'apikey': import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+            },
+            body: JSON.stringify({
+              passport_number: passport.trim().toUpperCase(),
+              reference_number: reference.trim().toUpperCase()
+            })
           }
-        });
+        );
 
-        if (fetchError) {
-          console.error("Edge function error:", fetchError);
-          throw new Error("Une erreur est survenue lors de la recherche");
-        }
+        const data = await response.json();
 
-        if (data?.error) {
-          if (data.error.includes("No visa found")) {
+        if (!response.ok) {
+          if (response.status === 404) {
             setError("Aucun visa trouvé avec ces informations. Veuillez vérifier vos données.");
           } else {
-            setError(data.error);
+            setError(data?.error || "Une erreur est survenue lors de la recherche.");
           }
         } else if (data?.visa) {
           setVisa(data.visa as Visa);
