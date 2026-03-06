@@ -5,7 +5,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { VisaDetails } from "@/components/VisaDetails";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 
 type VisaStatus = "Pending" | "Approved" | "Rejected" | "Expired";
 
